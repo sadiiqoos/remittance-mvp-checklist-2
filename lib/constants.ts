@@ -1,0 +1,43 @@
+import type { AdminRole, AdminPermission } from "./types"
+
+export const ROLE_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
+  super_admin: [
+    "view_dashboard",
+    "view_transactions",
+    "approve_transactions",
+    "reject_transactions",
+    "view_kyc",
+    "approve_kyc",
+    "reject_kyc",
+    "manage_pricing",
+    "view_users",
+    "manage_users",
+    "manage_admins",
+    "view_reports",
+    "manage_settings",
+  ],
+  admin: [
+    "view_dashboard",
+    "view_transactions",
+    "approve_transactions",
+    "reject_transactions",
+    "view_kyc",
+    "approve_kyc",
+    "reject_kyc",
+    "manage_pricing",
+    "view_users",
+    "view_reports",
+  ],
+  operations: ["view_dashboard", "view_transactions", "approve_transactions", "view_users", "view_reports"],
+  compliance: [
+    "view_dashboard",
+    "view_transactions",
+    "view_kyc",
+    "approve_kyc",
+    "reject_kyc",
+    "view_users",
+    "view_reports",
+  ],
+  finance: ["view_dashboard", "view_transactions", "manage_pricing", "view_reports"],
+  support: ["view_dashboard", "view_transactions", "view_users"],
+}
