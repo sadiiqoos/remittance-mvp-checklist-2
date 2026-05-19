@@ -124,7 +124,6 @@ export const securityHeaders = {
     "form-action 'self'",
     "base-uri 'self'",
     "object-src 'none'",
-    "upgrade-insecure-requests",
   ].join("; "),
 
   // ── Framing ──────────────────────────────────────────────────────────────
@@ -145,7 +144,6 @@ export const securityHeaders = {
   // ── Cross-origin policies ─────────────────────────────────────────────────
   "Cross-Origin-Opener-Policy": "same-origin",
   "Cross-Origin-Resource-Policy": "same-origin",
-  "Cross-Origin-Embedder-Policy": "require-corp",
 
   // ── Misc ─────────────────────────────────────────────────────────────────
   "X-Permitted-Cross-Domain-Policies": "none",
