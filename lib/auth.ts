@@ -1,13 +1,10 @@
 "use server"
 
-import { cookies } from "next/headers"
-import { mockUser } from "./mock-data"
-import { mockAdminUser, ADMIN_CREDENTIALS } from "./admin-mock-data"
+import { createClient } from "./supabase/server"
 import { checkRateLimit, resetRateLimit, logSecurityEvent } from "./security"
 import { loginSchema, signUpSchema, sanitizeEmail } from "./validation"
 
-const SESSION_COOKIE_NAME = "remitswift_session"
-const ADMIN_SESSION_COOKIE_NAME = "remitswift_admin_session"
+// ─── User Auth ────────────────────────────────────────────────────────────────
 
 export async function login(email: string, password: string): Promise<{ success: boolean; error?: string }> {
   try {
@@ -24,69 +21,65 @@ export async function login(email: string, password: string): Promise<{ success:
       return { success: false, error: `Too many attempts. Try again in ${waitMinutes} minutes.` }
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    const supabase = await createClient()
+    const { error } = await supabase.auth.signInWithPassword({
+      email: validatedData.email,
+      password: validatedData.password,
+    })
 
-    const isValidEmail = validatedData.email === mockUser.email
-    const isValidPassword = validatedData.password === "demo123" // In production, use: await verifyPassword(password, mockUser.passwordHash)
-
-    if (isValidEmail && isValidPassword) {
-      const cookieStore = await cookies()
-      cookieStore.set(SESSION_COOKIE_NAME, mockUser.id, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7,
-      })
-
-      resetRateLimit(`login:${sanitizeEmail(validatedData.email)}`)
-
+    if (error) {
       logSecurityEvent({
-        userId: mockUser.id,
-        action: "user_login",
-        success: true,
+        action: "login_failed",
+        success: false,
         metadata: { email: sanitizeEmail(validatedData.email) },
       })
-
-      return { success: true }
+      return { success: false, error: "Invalid email or password" }
     }
 
+    resetRateLimit(`login:${sanitizeEmail(validatedData.email)}`)
+
     logSecurityEvent({
-      action: "login_failed",
-      success: false,
+      action: "user_login",
+      success: true,
       metadata: { email: sanitizeEmail(validatedData.email) },
     })
 
-    return { success: false, error: "Invalid email or password" }
+    return { success: true }
   } catch (error) {
-    console.error("[v0] Login error:", error)
+    console.error("[auth] Login error:", error)
     return { success: false, error: "Invalid input data" }
   }
 }
 
 export async function logout(): Promise<void> {
-  const cookieStore = await cookies()
-  const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
+  const supabase = await createClient()
 
-  if (sessionCookie) {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (user) {
     logSecurityEvent({
-      userId: sessionCookie.value,
+      userId: user.id,
       action: "user_logout",
       success: true,
     })
   }
 
-  cookieStore.delete(SESSION_COOKIE_NAME)
+  await supabase.auth.signOut()
 }
 
 export async function getCurrentUser() {
-  const cookieStore = await cookies()
-  const sessionCookie = cookieStore.get(SESSION_COOKIE_NAME)
+  const supabase = await createClient()
+  const { data: { user }, error } = await supabase.auth.getUser()
 
-  if (!sessionCookie) {
-    return null
-  }
+  if (error || !user) return null
 
-  return mockUser
+  // Fetch the full user profile from your users table
+  const { data: profile } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", user.id)
+    .single()
+
+  return profile ?? null
 }
 
 export async function getUser() {
@@ -107,21 +100,38 @@ export async function signUp(
       return { success: false, error: "Too many signup attempts. Try again later." }
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    const supabase = await createClient()
 
-    if (validatedData.email === mockUser.email) {
-      return { success: false, error: "Email already registered" }
+    // Create auth user
+    const { data, error } = await supabase.auth.signUp({
+      email: validatedData.email,
+      password: validatedData.password,
+      options: {
+        data: {
+          full_name: validatedData.fullName,
+          phone: validatedData.phone,
+        },
+      },
+    })
+
+    if (error) {
+      return { success: false, error: error.message }
     }
 
-    // const passwordHash = await hashPassword(validatedData.password)
+    if (data.user) {
+      // Create profile row in users table
+      const nameParts = validatedData.fullName.trim().split(" ")
+      const firstName = nameParts[0]
+      const lastName = nameParts.slice(1).join(" ") || ""
 
-    const cookieStore = await cookies()
-    cookieStore.set(SESSION_COOKIE_NAME, "new-user-id", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
-    })
+      await supabase.from("users").insert({
+        id: data.user.id,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        first_name: firstName,
+        last_name: lastName,
+      })
+    }
 
     logSecurityEvent({
       action: "user_signup",
@@ -131,7 +141,7 @@ export async function signUp(
 
     return { success: true }
   } catch (error) {
-    console.error("[v0] Signup error:", error)
+    console.error("[auth] Signup error:", error)
     if (error instanceof Error) {
       return { success: false, error: error.message }
     }
@@ -140,9 +150,19 @@ export async function signUp(
 }
 
 export async function isAuthenticated(): Promise<boolean> {
-  const cookieStore = await cookies()
-  return cookieStore.has(SESSION_COOKIE_NAME)
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  return !!user
 }
+
+// ─── Admin Auth ───────────────────────────────────────────────────────────────
+// Admin still uses hardcoded credentials for now (no admin_users table yet).
+// Replace with Supabase admin_users table when ready.
+
+import { mockAdminUser, ADMIN_CREDENTIALS } from "./admin-mock-data"
+import { cookies } from "next/headers"
+
+const ADMIN_SESSION_COOKIE_NAME = "remitswift_admin_session"
 
 export async function loginAdmin(email: string, password: string): Promise<{ success: boolean; error?: string }> {
   try {
@@ -157,8 +177,6 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
       })
       return { success: false, error: "Too many admin login attempts. Contact support." }
     }
-
-    await new Promise((resolve) => setTimeout(resolve, 500))
 
     const isValidEmail = validatedData.email === ADMIN_CREDENTIALS.email
     const isValidPassword = validatedData.password === ADMIN_CREDENTIALS.password
@@ -192,7 +210,7 @@ export async function loginAdmin(email: string, password: string): Promise<{ suc
 
     return { success: false, error: "Invalid admin credentials" }
   } catch (error) {
-    console.error("[v0] Admin login error:", error)
+    console.error("[auth] Admin login error:", error)
     return { success: false, error: "Invalid input data" }
   }
 }
@@ -216,13 +234,10 @@ export async function getCurrentAdmin() {
   const cookieStore = await cookies()
   const sessionCookie = cookieStore.get(ADMIN_SESSION_COOKIE_NAME)
 
-  if (!sessionCookie) {
-    return null
-  }
+  if (!sessionCookie) return null
 
-  const adminId = sessionCookie.value
   const { getAdminById } = await import("./admin-mock-data")
-  return getAdminById(adminId)
+  return getAdminById(sessionCookie.value)
 }
 
 export async function getAdminUser() {
@@ -237,6 +252,5 @@ export async function isAdminAuthenticated(): Promise<boolean> {
 export async function hasAdminPermission(permission: string): Promise<boolean> {
   const admin = await getCurrentAdmin()
   if (!admin) return false
-
   return admin.permissions?.includes(permission) || false
 }

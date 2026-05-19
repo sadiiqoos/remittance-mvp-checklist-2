@@ -8,6 +8,7 @@ import { CorridorSelector } from "@/components/transfer/corridor-selector"
 import { AmountInput } from "@/components/transfer/amount-input"
 import { RecipientSelector } from "@/components/transfer/recipient-selector"
 import { TransferSummary } from "@/components/transfer/transfer-summary"
+import { AddRecipientDialog } from "@/components/transfer/add-recipient-dialog"
 import type { Corridor, ExchangeRate, Recipient, User } from "@/lib/types"
 import { getCorridors, getExchangeRate, getRecipients, createTransaction, getDemoUser } from "@/app/actions/transfer"
 import { Loader2 } from "lucide-react"
@@ -17,6 +18,7 @@ export function SendMoneyContent() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const [showAddRecipient, setShowAddRecipient] = useState(false)
 
   const [user, setUser] = useState<User | null>(null)
   const [corridors, setCorridors] = useState<Corridor[]>([])
@@ -49,7 +51,7 @@ export function SendMoneyContent() {
     if (selectedCorridor) {
       async function loadExchangeRate() {
         try {
-          const rate = await getExchangeRate("SEK", selectedCorridor.destination_currency)
+          const rate = await getExchangeRate("SEK", selectedCorridor!.destination_currency)
           setExchangeRate(rate)
         } catch (error) {
           console.error("[v0] Error loading exchange rate:", error)
@@ -63,8 +65,8 @@ export function SendMoneyContent() {
     if (user && selectedCorridor) {
       async function loadRecipients() {
         try {
-          const recipientsData = await getRecipients(user.id)
-          const filtered = recipientsData.filter((r) => r.country === selectedCorridor.destination_country)
+          const recipientsData = await getRecipients(user!.id)
+          const filtered = recipientsData.filter((r) => r.country === selectedCorridor!.destination_country)
           setRecipients(filtered)
         } catch (error) {
           console.error("[v0] Error loading recipients:", error)
@@ -97,15 +99,22 @@ export function SendMoneyContent() {
   }
 
   const handleSubmit = async () => {
-    if (!user || !selectedCorridor || !selectedRecipient || !exchangeRate) return
+    console.log("Submit clicked", { user: !!user, selectedCorridor: !!selectedCorridor, selectedRecipient: !!selectedRecipient, exchangeRate: !!exchangeRate })
+    if (!user || !selectedCorridor || !selectedRecipient || !exchangeRate) {
+      alert("Missing: " + (!user ? "user " : "") + (!selectedCorridor ? "corridor " : "") + (!selectedRecipient ? "recipient " : "") + (!exchangeRate ? "exchangeRate" : ""))
+      return
+    }
 
     setSubmitting(true)
     try {
       const source = Number.parseFloat(sourceAmount)
-      const destination = Number.parseFloat(destinationAmount)
+      const parsedDestination = Number.parseFloat(destinationAmount)
+      const destination = (!destinationAmount || Number.isNaN(parsedDestination) || parsedDestination <= 0)
+        ? Math.round(source * exchangeRate.rate * 100) / 100
+        : parsedDestination
       const total = source + transferFee
 
-      const transaction = await createTransaction({
+      const result = await createTransaction({
         userId: user.id,
         recipientId: selectedRecipient.id,
         sourceAmount: source,
@@ -118,7 +127,12 @@ export function SendMoneyContent() {
         payoutMethod: selectedRecipient.payout_method,
       })
 
-      router.push(`/transaction/${transaction.id}`)
+      if (!result.success) {
+        alert(result.error || "Failed to create transaction. Please try again.")
+        return
+      }
+
+      router.push("/dashboard")
     } catch (error) {
       console.error("[v0] Error creating transaction:", error)
       alert("Failed to create transaction. Please try again.")
@@ -189,7 +203,7 @@ export function SendMoneyContent() {
                 recipients={recipients}
                 selectedRecipient={selectedRecipient}
                 onSelect={setSelectedRecipient}
-                onAddNew={() => alert("Add recipient functionality coming soon")}
+                onAddNew={() => setShowAddRecipient(true)}
               />
             )}
 
@@ -257,6 +271,17 @@ export function SendMoneyContent() {
           </Card>
         </div>
       </div>
+
+      <AddRecipientDialog
+        open={showAddRecipient}
+        onClose={() => setShowAddRecipient(false)}
+        defaultCountry={selectedCorridor?.destination_country}
+        onAdded={(recipient) => {
+          setRecipients((prev) => [recipient, ...prev])
+          setSelectedRecipient(recipient)
+          setShowAddRecipient(false)
+        }}
+      />
     </main>
   )
 }

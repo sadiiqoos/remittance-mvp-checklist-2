@@ -6,77 +6,62 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getAllTransactions, updateTransactionStatus } from "@/lib/admin-mock-data"
-import type { Transaction } from "@/lib/types"
-import { Search, Filter, AlertTriangle, CheckCircle2, Clock, XCircle } from "lucide-react"
+import { Search, Filter, AlertTriangle, CheckCircle2, Clock, XCircle, Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { getAdminTransactions, updateAdminTransactionStatus } from "@/app/actions/admin"
 
-type TransactionWithDetails = Transaction & {
-  user?: { email: string; first_name: string; last_name: string }
-  recipient?: { first_name: string; last_name: string; country: string }
+type TransactionWithDetails = {
+  id: string
+  source_amount: number
+  destination_amount: number
+  destination_currency: string
+  status: string
+  aml_check_status: string
+  total_deducted_sek: number
+  created_at: string
+  corridor: string
+  payout_method: string
+  users?: { email: string; first_name: string; last_name: string }
+  recipients?: { first_name: string; last_name: string; country: string }
 }
 
 export function AdminTransactionsContent() {
   const [transactions, setTransactions] = useState<TransactionWithDetails[]>([])
-  const [filteredTransactions, setFilteredTransactions] = useState<TransactionWithDetails[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
-  const [selectedTransaction, setSelectedTransaction] = useState<TransactionWithDetails | null>(null)
   const { toast } = useToast()
 
   useEffect(() => {
     loadTransactions()
   }, [])
 
-  useEffect(() => {
-    filterTransactions()
-  }, [searchQuery, statusFilter, transactions])
-
-  const loadTransactions = () => {
-    const data = getAllTransactions()
+  async function loadTransactions() {
+    setLoading(true)
+    const data = await getAdminTransactions()
     setTransactions(data)
+    setLoading(false)
   }
 
-  const filterTransactions = () => {
-    let filtered = transactions
-
-    if (statusFilter !== "all") {
-      filtered = filtered.filter((t) => t.status === statusFilter)
+  const handleStatusUpdate = async (transactionId: string, newStatus: string) => {
+    const result = await updateAdminTransactionStatus(transactionId, newStatus)
+    if (!result.success) {
+      toast({ title: "Error", description: "Failed to update transaction", variant: "destructive" })
+      return
     }
-
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (t) =>
-          t.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          t.user?.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          t.recipient?.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          t.recipient?.last_name.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    }
-
-    setFilteredTransactions(filtered)
-  }
-
-  const handleStatusUpdate = (transactionId: string, newStatus: string) => {
-    updateTransactionStatus(transactionId, newStatus as any)
-    loadTransactions()
-    toast({
-      title: "Transaction updated",
-      description: `Transaction status changed to ${newStatus}`,
-    })
+    setTransactions(transactions.map(t => t.id === transactionId ? { ...t, status: newStatus } : t))
+    toast({ title: "Transaction updated", description: `Status changed to ${newStatus}` })
   }
 
   const getStatusBadge = (status: string) => {
-    const config = {
+    const config: Record<string, { label: string; icon: any; className: string }> = {
       completed: { label: "Completed", icon: CheckCircle2, className: "bg-green-100 text-green-800" },
       processing: { label: "Processing", icon: Clock, className: "bg-blue-100 text-blue-800" },
       pending: { label: "Pending", icon: Clock, className: "bg-yellow-100 text-yellow-800" },
       failed: { label: "Failed", icon: XCircle, className: "bg-red-100 text-red-800" },
       flagged: { label: "Flagged", icon: AlertTriangle, className: "bg-orange-100 text-orange-800" },
     }
-
-    const { label, icon: Icon, className } = config[status as keyof typeof config] || config.pending
-
+    const { label, icon: Icon, className } = config[status] || config.pending
     return (
       <Badge className={className}>
         <Icon className="w-3 h-3 mr-1" />
@@ -85,19 +70,23 @@ export function AdminTransactionsContent() {
     )
   }
 
-  const getStats = () => {
-    return {
-      total: transactions.length,
-      completed: transactions.filter((t) => t.status === "completed").length,
-      pending: transactions.filter((t) => t.status === "pending" || t.status === "processing").length,
-      flagged: transactions.filter((t) => t.compliance_check_status === "flagged").length,
-      totalVolume: transactions
-        .filter((t) => t.status === "completed")
-        .reduce((sum, t) => sum + t.total_deducted_sek, 0),
-    }
-  }
+  const filteredTransactions = transactions.filter((t) => {
+    const matchesStatus = statusFilter === "all" || t.status === statusFilter
+    const query = searchQuery.toLowerCase()
+    const matchesSearch = !searchQuery ||
+      t.id.toLowerCase().includes(query) ||
+      t.users?.email?.toLowerCase().includes(query) ||
+      t.recipients?.first_name?.toLowerCase().includes(query) ||
+      t.recipients?.last_name?.toLowerCase().includes(query)
+    return matchesStatus && matchesSearch
+  })
 
-  const stats = getStats()
+  const stats = {
+    total: transactions.length,
+    completed: transactions.filter(t => t.status === "completed").length,
+    pending: transactions.filter(t => t.status === "pending" || t.status === "processing").length,
+    flagged: transactions.filter(t => t.aml_check_status === "flagged").length,
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -149,71 +138,75 @@ export function AdminTransactionsContent() {
         </Select>
       </div>
 
-      <div className="space-y-4">
-        {filteredTransactions.map((transaction) => (
-          <Card key={transaction.id} className="p-6">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <div className="font-mono text-sm text-muted-foreground mb-1">{transaction.id}</div>
-                <div className="font-semibold">
-                  {transaction.user?.first_name} {transaction.user?.last_name}
-                </div>
-                <div className="text-sm text-muted-foreground">{transaction.user?.email}</div>
-              </div>
-              <div className="text-right">
-                {getStatusBadge(transaction.status)}
-                {transaction.compliance_check_status === "flagged" && (
-                  <Badge className="bg-orange-100 text-orange-800 ml-2">
-                    <AlertTriangle className="w-3 h-3 mr-1" />
-                    Flagged
-                  </Badge>
-                )}
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
-              <div>
-                <div className="text-muted-foreground">Amount</div>
-                <div className="font-semibold">{(transaction.source_amount_sek || 0).toFixed(2)} SEK</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground">Recipient Gets</div>
-                <div className="font-semibold">
-                  {(transaction.destination_amount || 0).toFixed(2)} {transaction.destination_currency || "USD"}
-                </div>
-              </div>
-              <div>
-                <div className="text-muted-foreground">To</div>
-                <div className="font-semibold">
-                  {transaction.recipient?.first_name} {transaction.recipient?.last_name}
-                </div>
-                <div className="text-xs text-muted-foreground">{transaction.recipient?.country}</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground">Created</div>
-                <div className="font-semibold">{new Date(transaction.created_at).toLocaleDateString()}</div>
-              </div>
-            </div>
-
-            {transaction.status === "pending" && (
-              <div className="flex gap-2">
-                <Button size="sm" onClick={() => handleStatusUpdate(transaction.id, "processing")}>
-                  Approve
-                </Button>
-                <Button size="sm" variant="destructive" onClick={() => handleStatusUpdate(transaction.id, "failed")}>
-                  Reject
-                </Button>
-              </div>
-            )}
-          </Card>
-        ))}
-      </div>
-
-      {filteredTransactions.length === 0 && (
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+        </div>
+      ) : filteredTransactions.length === 0 ? (
         <div className="text-center py-12">
           <Filter className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-2">No transactions found</h3>
           <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {filteredTransactions.map((transaction) => (
+            <Card key={transaction.id} className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className="font-mono text-sm text-muted-foreground mb-1">{transaction.id}</div>
+                  <div className="font-semibold">
+                    {transaction.users?.first_name} {transaction.users?.last_name}
+                  </div>
+                  <div className="text-sm text-muted-foreground">{transaction.users?.email}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  {getStatusBadge(transaction.status)}
+                  {transaction.aml_check_status === "flagged" && (
+                    <Badge className="bg-orange-100 text-orange-800">
+                      <AlertTriangle className="w-3 h-3 mr-1" />
+                      AML Flagged
+                    </Badge>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
+                <div>
+                  <div className="text-muted-foreground">Amount</div>
+                  <div className="font-semibold">{(transaction.source_amount ?? 0).toFixed(2)} SEK</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground">Recipient Gets</div>
+                  <div className="font-semibold">
+                    {(transaction.destination_amount ?? 0).toFixed(2)} {transaction.destination_currency}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground">To</div>
+                  <div className="font-semibold">
+                    {transaction.recipients?.first_name} {transaction.recipients?.last_name}
+                  </div>
+                  <div className="text-xs text-muted-foreground">{transaction.recipients?.country}</div>
+                </div>
+                <div>
+                  <div className="text-muted-foreground">Created</div>
+                  <div className="font-semibold">{new Date(transaction.created_at).toLocaleDateString()}</div>
+                </div>
+              </div>
+
+              {transaction.status === "pending" && (
+                <div className="flex gap-2">
+                  <Button size="sm" onClick={() => handleStatusUpdate(transaction.id, "processing")}>
+                    Approve
+                  </Button>
+                  <Button size="sm" variant="destructive" onClick={() => handleStatusUpdate(transaction.id, "failed")}>
+                    Reject
+                  </Button>
+                </div>
+              )}
+            </Card>
+          ))}
         </div>
       )}
     </main>

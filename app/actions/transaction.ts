@@ -1,63 +1,90 @@
-import { transactionMonitor } from "@/lib/transaction-monitoring"
-import { validateTransferSchema } from "@/lib/validation"
-import { getCurrentUser } from "@/lib/user"
-import { getMockTransactions } from "@/lib/transactions"
-import type { Transaction } from "@/types/transaction"
+"use server"
+
+import { createClient } from "@/lib/supabase/server"
+import { getCurrentUser } from "@/lib/auth"
 import { logSecurityEvent } from "@/lib/security"
-import { getExchangeRate } from "@/lib/exchange-rate"
-import { getCorridorData } from "@/lib/corridor"
+import { transactionMonitor } from "@/lib/transaction-monitoring"
+import type { Transaction } from "@/types/transaction"
 
 export async function createTransfer(formData: FormData) {
-  "use server"
-
   try {
     const recipientId = formData.get("recipientId") as string
     const sourceAmount = formData.get("sourceAmount") as string
     const corridor = formData.get("corridor") as string
     const payoutMethod = formData.get("payoutMethod") as string
 
-    const validatedData = validateTransferSchema.parse({
-      recipientId,
-      sourceAmount: Number.parseFloat(sourceAmount),
-      corridor,
-      payoutMethod,
-    })
+    if (!recipientId || !sourceAmount || !corridor || !payoutMethod) {
+      return { success: false, error: "Missing required fields" }
+    }
 
     const user = await getCurrentUser()
     if (!user) {
       return { success: false, error: "Not authenticated" }
     }
 
-    // Get user's transaction history
-    const history = await getMockTransactions(user.id)
+    const supabase = await createClient()
 
-    // Get exchange rate and corridor data
-    const rate = await getExchangeRate(validatedData.corridor)
-    const corridorData = await getCorridorData(validatedData.corridor)
-    const destinationAmount = validatedData.sourceAmount * rate.rate
-    const totalCost = destinationAmount + corridorData.base_fee_sek
+    // Get corridor data from Supabase
+    const { data: corridorData, error: corridorError } = await supabase
+      .from("corridors")
+      .select("*")
+      .eq("name", corridor)
+      .eq("is_active", true)
+      .single()
 
-    // Create transaction object for monitoring
+    if (corridorError || !corridorData) {
+      return { success: false, error: "Invalid corridor selected" }
+    }
+
+    // Get exchange rate from Supabase
+    const { data: rateData, error: rateError } = await supabase
+      .from("exchange_rates")
+      .select("*")
+      .eq("source_currency", "SEK")
+      .eq("destination_currency", corridorData.destination_currency)
+      .eq("is_active", true)
+      .order("updated_at", { ascending: false })
+      .limit(1)
+      .single()
+
+    if (rateError || !rateData) {
+      return { success: false, error: "Exchange rate not available" }
+    }
+
+    // Get user's transaction history for AML monitoring
+    const { data: history } = await supabase
+      .from("transactions")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false })
+      .limit(50)
+
+    const parsedAmount = parseFloat(sourceAmount)
+    const destinationAmount = parsedAmount * rateData.rate
+    const transferFee = corridorData.base_fee_sek ?? 0
+    const totalCost = parsedAmount + transferFee
+
+    // Build transaction object for monitoring
     const newTransaction: Transaction = {
       id: `txn-${Date.now()}`,
       user_id: user.id,
-      recipient_id: validatedData.recipientId,
+      recipient_id: recipientId,
       reference_number: `REF${Date.now()}`,
-      source_amount: validatedData.sourceAmount,
+      source_amount: parsedAmount,
       source_currency: "SEK",
       destination_amount: destinationAmount,
-      destination_currency: rate.destination_currency,
-      exchange_rate: rate.rate,
-      exchange_rate_provider: rate.provider,
-      transfer_fee: corridorData.base_fee_sek,
+      destination_currency: corridorData.destination_currency,
+      exchange_rate: rateData.rate,
+      exchange_rate_provider: rateData.provider ?? "internal",
+      transfer_fee: transferFee,
       fx_margin: 0,
       total_deducted_sek: totalCost,
       status: "pending",
-      corridor: validatedData.corridor,
-      payout_method: validatedData.payoutMethod,
-      partner_name: "mock-partner",
+      corridor,
+      payout_method: payoutMethod,
+      partner_name: corridorData.partner_name ?? "internal",
       aml_check_status: "pending",
-      aml_check_provider: "mock-aml-provider",
+      aml_check_provider: "internal",
       sanctions_check_status: "pending",
       initiated_at: new Date().toISOString(),
       created_at: new Date().toISOString(),
@@ -69,7 +96,12 @@ export async function createTransfer(formData: FormData) {
       partner_transaction_id: null,
     }
 
-    const monitoringResult = await transactionMonitor.monitorTransaction(newTransaction, user, history)
+    // Run AML/transaction monitoring
+    const monitoringResult = await transactionMonitor.monitorTransaction(
+      newTransaction,
+      user,
+      history ?? []
+    )
 
     if (!monitoringResult.allowed) {
       logSecurityEvent({
@@ -82,31 +114,95 @@ export async function createTransfer(formData: FormData) {
           reasons: monitoringResult.alerts.map((a) => a.reason),
         },
       })
-
       return {
         success: false,
         error: "Transaction blocked by security system. Please contact support.",
       }
     }
 
-    // Update transaction status based on monitoring
-    if (monitoringResult.requiresReview) {
-      newTransaction.status = "pending"
-      newTransaction.aml_check_status = "flagged"
-      newTransaction.notes = "Flagged for manual review"
-    } else {
-      newTransaction.aml_check_status = "passed"
-      newTransaction.sanctions_check_status = "passed"
+    // Set AML status based on monitoring result
+    const amlStatus = monitoringResult.requiresReview ? "flagged" : "passed"
+    const sanctionsStatus = monitoringResult.requiresReview ? "pending" : "passed"
+    const txStatus = monitoringResult.requiresReview ? "pending" : "processing"
+    const notes = monitoringResult.requiresReview ? "Flagged for manual review" : null
+
+    // Save transaction to Supabase
+    const { data: savedTransaction, error: insertError } = await supabase
+      .from("transactions")
+      .insert({
+        user_id: user.id,
+        recipient_id: recipientId,
+        source_amount: parsedAmount,
+        source_currency: "SEK",
+        destination_amount: destinationAmount,
+        destination_currency: corridorData.destination_currency,
+        exchange_rate: rateData.rate,
+        transfer_fee: transferFee,
+        total_deducted: totalCost,
+        corridor,
+        payout_method: payoutMethod,
+        status: txStatus,
+        aml_check_status: amlStatus,
+        sanctions_check_status: sanctionsStatus,
+        notes,
+      })
+      .select()
+      .single()
+
+    if (insertError) {
+      console.error("[transaction] Insert error:", insertError)
+      return { success: false, error: "Failed to save transaction" }
     }
 
-    // ... existing code to create transaction ...
+    logSecurityEvent({
+      userId: user.id,
+      action: "transaction_created",
+      success: true,
+      metadata: {
+        transactionId: savedTransaction.id,
+        amount: parsedAmount,
+        currency: corridorData.destination_currency,
+      },
+    })
 
-    return { success: true, transactionId: newTransaction.id }
+    return { success: true, transactionId: savedTransaction.id }
   } catch (error) {
-    console.error("[v0] Transfer error:", error)
-    if (error instanceof Error) {
-      return { success: false, error: error.message }
-    }
+    console.error("[transaction] Transfer error:", error)
+    logSecurityEvent({
+      action: "transaction_failed",
+      success: false,
+      metadata: { error: error instanceof Error ? error.message : "Unknown error" },
+    })
     return { success: false, error: "Failed to create transfer" }
   }
+}
+
+export async function getTransactions(userId: string) {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*, recipients(*)")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
+
+  if (error) {
+    console.error("[transaction] getTransactions error:", error)
+    return []
+  }
+  return data
+}
+
+export async function getTransactionById(transactionId: string) {
+  const supabase = await createClient()
+  const { data, error } = await supabase
+    .from("transactions")
+    .select("*, recipients(*)")
+    .eq("id", transactionId)
+    .single()
+
+  if (error) {
+    console.error("[transaction] getTransactionById error:", error)
+    return null
+  }
+  return data
 }
