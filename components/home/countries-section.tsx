@@ -4,44 +4,43 @@ import { useState } from "react"
 import { ChevronRight } from "lucide-react"
 
 const popularCountries = [
-  { name: "Somalia", flag: "🇸🇴", code: "SO" },
-  { name: "Kenya", flag: "🇰🇪", code: "KE" },
-  { name: "Ethiopia", flag: "🇪🇹", code: "ET" },
-  { name: "Djibouti", flag: "🇩🇯", code: "DJ" },
-  { name: "Uganda", flag: "🇺🇬", code: "UG" },
-  { name: "Tanzania", flag: "🇹🇿", code: "TZ" },
+  { name: "Somalia", code: "so" },
+  { name: "Kenya", code: "ke" },
+  { name: "Ethiopia", code: "et" },
+  { name: "Djibouti", code: "dj" },
+  { name: "Uganda", code: "ug" },
+  { name: "Tanzania", code: "tz" },
 ]
 
 const allCountries = [
-  { name: "Somalia", flag: "🇸🇴", code: "SO" },
-  { name: "Kenya", flag: "🇰🇪", code: "KE" },
-  { name: "Ethiopia", flag: "🇪🇹", code: "ET" },
-  { name: "Djibouti", flag: "🇩🇯", code: "DJ" },
-  { name: "Uganda", flag: "🇺🇬", code: "UG" },
-  { name: "Tanzania", flag: "🇹🇿", code: "TZ" },
-  { name: "Ghana", flag: "🇬🇭", code: "GH" },
-  { name: "Nigeria", flag: "🇳🇬", code: "NG" },
-  { name: "Rwanda", flag: "🇷🇼", code: "RW" },
-  { name: "Zambia", flag: "🇿🇲", code: "ZM" },
-  { name: "Senegal", flag: "🇸🇳", code: "SN" },
-  { name: "Cameroon", flag: "🇨🇲", code: "CM" },
-  { name: "South Africa", flag: "🇿🇦", code: "ZA" },
-  { name: "South Sudan", flag: "🇸🇸", code: "SS" },
-  { name: "Eritrea", flag: "🇪🇷", code: "ER" },
-  { name: "Sudan", flag: "🇸🇩", code: "SD" },
-  { name: "Mozambique", flag: "🇲🇿", code: "MZ" },
-  { name: "Zimbabwe", flag: "🇿🇼", code: "ZW" },
-  { name: "Malawi", flag: "🇲🇼", code: "MW" },
-  { name: "Burkina Faso", flag: "🇧🇫", code: "BF" },
-  { name: "Mali", flag: "🇲🇱", code: "ML" },
-  { name: "Congo DRC", flag: "🇨🇩", code: "CD" },
-  { name: "Pakistan", flag: "🇵🇰", code: "PK" },
-  { name: "India", flag: "🇮🇳", code: "IN" },
+  { name: "Somalia", code: "so" },
+  { name: "Kenya", code: "ke" },
+  { name: "Ethiopia", code: "et" },
+  { name: "Djibouti", code: "dj" },
+  { name: "Uganda", code: "ug" },
+  { name: "Tanzania", code: "tz" },
+  { name: "Ghana", code: "gh" },
+  { name: "Nigeria", code: "ng" },
+  { name: "Rwanda", code: "rw" },
+  { name: "Zambia", code: "zm" },
+  { name: "Senegal", code: "sn" },
+  { name: "Cameroon", code: "cm" },
+  { name: "South Africa", code: "za" },
+  { name: "South Sudan", code: "ss" },
+  { name: "Eritrea", code: "er" },
+  { name: "Sudan", code: "sd" },
+  { name: "Mozambique", code: "mz" },
+  { name: "Zimbabwe", code: "zw" },
+  { name: "Malawi", code: "mw" },
+  { name: "Burkina Faso", code: "bf" },
+  { name: "Mali", code: "ml" },
+  { name: "Congo DRC", code: "cd" },
+  { name: "Pakistan", code: "pk" },
+  { name: "India", code: "in" },
 ]
 
 export function CountriesSection() {
   const [showAll, setShowAll] = useState(false)
-
   const displayedCountries = showAll ? allCountries : popularCountries
 
   return (
@@ -61,7 +60,17 @@ export function CountriesSection() {
               className="group flex items-center gap-4 bg-purple-700/50 hover:bg-purple-600/70 backdrop-blur-sm rounded-xl p-4 transition-all duration-200 text-left border border-purple-500/30"
             >
               <div className="flex items-center gap-3 flex-1">
-                <span className="text-3xl leading-none">{country.flag}</span>
+                <span
+                  className={`fi fi-${country.code} fis`}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: "50%",
+                    display: "inline-block",
+                    backgroundSize: "cover",
+                    flexShrink: 0,
+                  }}
+                />
                 <span className="text-white text-lg font-medium">{country.name}</span>
               </div>
               <ChevronRight className="w-6 h-6 text-white group-hover:translate-x-1 transition-transform" />
