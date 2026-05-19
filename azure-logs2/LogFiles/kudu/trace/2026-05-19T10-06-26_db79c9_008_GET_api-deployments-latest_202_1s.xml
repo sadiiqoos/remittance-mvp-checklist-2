@@ -1,0 +1,8 @@
+<step title="Incoming Request" date="2026-05-19T10:06:26.546" instance="db79c9" url="/api/deployments/latest?deployer=OneDeploy&amp;time=2026-05-19_10-06-19Z" method="GET" type="request" pid="831,1,28" Host="remitswift-app-e7gxgwgrcbg9e8cj.scm.westeurope-01.azurewebsites.net" User-Agent="GITHUBACTIONS_DeployWebAppToAzure_7e18aec8c5e1c8c48457f9dce5496137148d0084ca7547dbd3f2788cf78bf16d_v3.0.8" Authorization="Bea..." Content-Type="application/json; charset=utf-8" Cookie="ARRAffinity=db79c9069631f8468e3c8b1c0ab023ae2f1dbdbd4d92922bfc31a5ab2409022c; ARRAffinitySameSite=db79c9069631f8468e3c8b1c0ab023ae2f1dbdbd4d92922bfc31a5ab2409022c" Content-Length="0" X-ARR-LOG-ID="0eff7882-694c-4511-97bd-5a49326881da" CLIENT-IP="52.161.59.6:54337" X-SITE-DEPLOYMENT-ID="remitswift-app" WAS-DEFAULT-HOSTNAME="remitswift-app-e7gxgwgrcbg9e8cj.scm.westeurope-01.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest?deployer=OneDeploy&amp;time=2026-05-19_10-06-19Z" X-Client-IP="52.161.59.6" X-Client-Port="54337" >
+  <step title="DeploymentService.GetResult" date="2026-05-19T10:06:26.646" >
+    <step title="DeploymentService.GetLatestDeployment" date="2026-05-19T10:06:26.648" >
+      <step title="DeploymentManager.GetResults" date="2026-05-19T10:06:26.656" /><!-- duration: 556ms -->
+    </step><!-- duration: 568ms -->
+  </step><!-- duration: 574ms -->
+  <step title="Outgoing response" date="2026-05-19T10:06:27.227" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 2ms -->
+</step><!-- duration: 686ms -->

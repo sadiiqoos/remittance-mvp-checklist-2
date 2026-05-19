@@ -26,7 +26,6 @@ export function checkRateLimit(
   const entry = rateLimitStore.get(identifier)
 
   if (!entry || now > entry.resetAt) {
-    // Create new entry
     const resetAt = now + windowMs
     rateLimitStore.set(identifier, { count: 1, resetAt })
     return { allowed: true, remainingAttempts: maxAttempts - 1, resetAt }
@@ -63,13 +62,9 @@ export function logSecurityEvent(log: Omit<AuditLog, "timestamp">): void {
   }
   auditLogs.push(entry)
 
-  // Log to console in development
   if (process.env.NODE_ENV === "development") {
     console.log("[SECURITY AUDIT]", entry)
   }
-
-  // In production, send to monitoring service
-  // Example: sendToMonitoring(entry)
 }
 
 export function getAuditLogs(limit = 100): AuditLog[] {
@@ -81,7 +76,6 @@ export function generateSecureToken(): string {
   if (typeof crypto !== "undefined" && crypto.getRandomValues) {
     crypto.getRandomValues(array)
   } else {
-    // Fallback for Node.js
     const nodeCrypto = require("crypto")
     const buffer = nodeCrypto.randomBytes(32)
     for (let i = 0; i < 32; i++) {
@@ -97,15 +91,14 @@ export function generateCSRFToken(): string {
 
 export function sanitizeInput(input: string): string {
   return input
-    .replace(/[<>'"]/g, "") // Remove potential XSS chars
-    .replace(/(\b)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|CREATE|EXEC)(\b)/gi, "") // Remove SQL keywords
+    .replace(/[<>'"]/g, "")
+    .replace(/(\b)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER|CREATE|EXEC)(\b)/gi, "")
     .trim()
     .substring(0, 10000)
 }
 
 export function validateSession(sessionId: string | undefined): boolean {
   if (!sessionId) return false
-  // Check if session ID format is valid (UUID or hex token)
   const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
   const tokenPattern = /^[a-zA-Z0-9-_]+$/
   return uuidPattern.test(sessionId) || (tokenPattern.test(sessionId) && sessionId.length >= 16)
@@ -116,14 +109,46 @@ export function getRateLimitKey(identifier: string, ip?: string): string {
 }
 
 export const securityHeaders = {
-  "Content-Security-Policy":
-    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://*.vercel-insights.com https://vercel.live; frame-src 'self' https://vercel.live; form-action 'self'; base-uri 'self';",
+  // ── Content Security Policy ──────────────────────────────────────────────
+  // Note: unsafe-inline and unsafe-eval are required by Next.js for hydration.
+  // Nonce-based CSP would remove these but requires server-side rendering changes.
+  "Content-Security-Policy": [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://vercel.live",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: https: blob:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.vercel-insights.com https://vercel.live",
+    "frame-src 'self' https://vercel.live",
+    "frame-ancestors 'none'",
+    "form-action 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "upgrade-insecure-requests",
+  ].join("; "),
+
+  // ── Framing ──────────────────────────────────────────────────────────────
   "X-Frame-Options": "DENY",
+
+  // ── Content type ─────────────────────────────────────────────────────────
   "X-Content-Type-Options": "nosniff",
+
+  // ── Referrer ─────────────────────────────────────────────────────────────
   "Referrer-Policy": "strict-origin-when-cross-origin",
-  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
+
+  // ── Permissions ──────────────────────────────────────────────────────────
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=()",
+
+  // ── HSTS ─────────────────────────────────────────────────────────────────
   "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
-  "X-Permitted-Cross-Domain-Policies": "none",
+
+  // ── Cross-origin policies ─────────────────────────────────────────────────
   "Cross-Origin-Opener-Policy": "same-origin",
   "Cross-Origin-Resource-Policy": "same-origin",
+  "Cross-Origin-Embedder-Policy": "require-corp",
+
+  // ── Misc ─────────────────────────────────────────────────────────────────
+  "X-Permitted-Cross-Domain-Policies": "none",
+  "X-DNS-Prefetch-Control": "on",
+  "X-XSS-Protection": "1; mode=block",
 }

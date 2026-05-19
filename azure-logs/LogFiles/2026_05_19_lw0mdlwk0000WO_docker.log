@@ -1,0 +1,609 @@
+2026-05-19T09:44:53.6594992Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:44:55.1005048Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-05-19T09:44:55.1006816Z Container start method called.
+2026-05-19T09:44:55.1008154Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:44:55.1009452Z Establishing network.
+2026-05-19T09:44:55.1011048Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:45:24.3506767Z Container is starting.
+2026-05-19T09:45:24.3518584Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:45:24.3521616Z Establishing user namespace if not established already.
+2026-05-19T09:45:24.3523256Z Establishing network if not established already.
+2026-05-19T09:45:24.3524615Z Mounting volumes.
+2026-05-19T09:45:24.3717906Z Nested mountpoint 
+2026-05-19T09:45:24.3737899Z Nested mountpoint volatile/logs
+2026-05-19T09:45:24.3768787Z Nested mountpoint 
+2026-05-19T09:45:24.4244767Z Nested mountpoint 
+2026-05-19T09:45:24.4253182Z Nested mountpoint 
+2026-05-19T09:45:24.4428455Z Nested mountpoint 
+2026-05-19T09:45:24.4527481Z Nested mountpoint 
+2026-05-19T09:45:24.8153524Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:45:24.8157556Z Creating container.
+2026-05-19T09:45:24.8160450Z Creating pipes for streaming container io.
+2026-05-19T09:45:24.8161725Z Creating stdout named pipe at /podr/container/pipe/90c2cd748eaa_remitswift-app/stdout_79496ae36be447c9936acfc7d091cf74.
+2026-05-19T09:45:24.8163936Z Successfully created stdout named pipe at: /podr/container/pipe/90c2cd748eaa_remitswift-app/stdout_79496ae36be447c9936acfc7d091cf74.
+2026-05-19T09:45:24.8165010Z Opening named pipe /podr/container/pipe/90c2cd748eaa_remitswift-app/stdout_79496ae36be447c9936acfc7d091cf74 for reading in non-blocking mode.
+2026-05-19T09:45:24.8166270Z Successfully opened named pipe: /podr/container/pipe/90c2cd748eaa_remitswift-app/stdout_79496ae36be447c9936acfc7d091cf74.
+2026-05-19T09:45:24.8167255Z Successfully removed non-blocking flag from /podr/container/pipe/90c2cd748eaa_remitswift-app/stdout_79496ae36be447c9936acfc7d091cf74.
+2026-05-19T09:45:24.8169099Z Creating stderr named pipe at /podr/container/pipe/90c2cd748eaa_remitswift-app/stderr_3aa62b70c7d04cbdbd1c63d335148d02.
+2026-05-19T09:45:24.8249175Z Successfully created stderr named pipe at: /podr/container/pipe/90c2cd748eaa_remitswift-app/stderr_3aa62b70c7d04cbdbd1c63d335148d02.
+2026-05-19T09:45:24.8251477Z Opening named pipe /podr/container/pipe/90c2cd748eaa_remitswift-app/stderr_3aa62b70c7d04cbdbd1c63d335148d02 for reading in non-blocking mode.
+2026-05-19T09:45:24.8253801Z Successfully opened named pipe: /podr/container/pipe/90c2cd748eaa_remitswift-app/stderr_3aa62b70c7d04cbdbd1c63d335148d02.
+2026-05-19T09:45:24.8256266Z Successfully removed non-blocking flag from /podr/container/pipe/90c2cd748eaa_remitswift-app/stderr_3aa62b70c7d04cbdbd1c63d335148d02.
+2026-05-19T09:45:24.8259017Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:45:25.3340248Z Starting container: 90c2cd748eaa_remitswift-app.
+2026-05-19T09:45:25.4556001Z Starting watchers and probes.
+2026-05-19T09:45:25.4560235Z Starting metrics collection.
+2026-05-19T09:45:25.4562388Z Container is running.
+2026-05-19T09:45:25.4563960Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:45:25.5886364Z Container start method finished after 30487 ms.
+2026-05-19T09:45:25.5889004Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:45:25.5889265Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:46:05.2739375Z Container has finished running with exit code: 127.
+2026-05-19T09:46:05.3023047Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:46:05.3193350Z Stop and delete container. Retry count = 0
+2026-05-19T09:46:05.3264898Z Stopping container: 90c2cd748eaa_remitswift-app.
+2026-05-19T09:46:05.3920117Z Deleting container: 90c2cd748eaa_remitswift-app. Retry count = 0
+2026-05-19T09:46:08.5905899Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:46:08.6007180Z Container is terminated. Total time elapsed: 3296 ms.
+2026-05-19T09:46:08.6017461Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:46:08.6101564Z State: Stopping, Action: CancellingStartup, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:08.6718098Z Site startup probe failed after 43.0814842 seconds.
+2026-05-19T09:46:08.9167284Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:08.9329690Z Failed to start site. Revert by stopping site.
+2026-05-19T09:46:08.9494520Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:08.9676475Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:08.9686585Z Site: remitswift-app stopped.
+2026-05-19T09:46:09.0044471Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:09.6105820Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:46:09.8050192Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:46:09 (UTC), DetailsLevel: ERR
+2026-05-19T09:46:09.8770166Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:46:09 (UTC), DetailsLevel: ERR
+2026-05-19T09:46:10.1042480Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:46:09 (UTC), DetailsLevel: ERR
+2026-05-19T09:46:11.0378928Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:46:09 (UTC), DetailsLevel: ERR
+2026-05-19T09:46:11.0381243Z Container start method called.
+2026-05-19T09:46:11.0381920Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:46:11.0383176Z Establishing network.
+2026-05-19T09:46:11.0384747Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:46:33.0405859Z Container is starting.
+2026-05-19T09:46:33.0409666Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:46:33.0426814Z Establishing user namespace if not established already.
+2026-05-19T09:46:33.0428099Z Establishing network if not established already.
+2026-05-19T09:46:33.0429450Z Mounting volumes.
+2026-05-19T09:46:33.0431171Z Nested mountpoint 
+2026-05-19T09:46:33.0505726Z Nested mountpoint volatile/logs
+2026-05-19T09:46:33.0665243Z Nested mountpoint 
+2026-05-19T09:46:33.0672215Z Nested mountpoint 
+2026-05-19T09:46:33.0677617Z Nested mountpoint 
+2026-05-19T09:46:33.1222898Z Nested mountpoint 
+2026-05-19T09:46:33.1824878Z Nested mountpoint 
+2026-05-19T09:46:33.4551641Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:46:33.4553766Z Creating container.
+2026-05-19T09:46:33.4555172Z Creating pipes for streaming container io.
+2026-05-19T09:46:33.4556714Z Creating stdout named pipe at /podr/container/pipe/734d38c9635e_remitswift-app/stdout_a8ca4efdebd14f2d8abd174614302485.
+2026-05-19T09:46:33.4558865Z Successfully created stdout named pipe at: /podr/container/pipe/734d38c9635e_remitswift-app/stdout_a8ca4efdebd14f2d8abd174614302485.
+2026-05-19T09:46:33.4559978Z Opening named pipe /podr/container/pipe/734d38c9635e_remitswift-app/stdout_a8ca4efdebd14f2d8abd174614302485 for reading in non-blocking mode.
+2026-05-19T09:46:33.4561214Z Successfully opened named pipe: /podr/container/pipe/734d38c9635e_remitswift-app/stdout_a8ca4efdebd14f2d8abd174614302485.
+2026-05-19T09:46:33.4616791Z Successfully removed non-blocking flag from /podr/container/pipe/734d38c9635e_remitswift-app/stdout_a8ca4efdebd14f2d8abd174614302485.
+2026-05-19T09:46:33.4620210Z Creating stderr named pipe at /podr/container/pipe/734d38c9635e_remitswift-app/stderr_4206414a79024c058b8176f95f6d43f9.
+2026-05-19T09:46:33.4622996Z Successfully created stderr named pipe at: /podr/container/pipe/734d38c9635e_remitswift-app/stderr_4206414a79024c058b8176f95f6d43f9.
+2026-05-19T09:46:33.4624663Z Opening named pipe /podr/container/pipe/734d38c9635e_remitswift-app/stderr_4206414a79024c058b8176f95f6d43f9 for reading in non-blocking mode.
+2026-05-19T09:46:33.4626052Z Successfully opened named pipe: /podr/container/pipe/734d38c9635e_remitswift-app/stderr_4206414a79024c058b8176f95f6d43f9.
+2026-05-19T09:46:33.4627612Z Successfully removed non-blocking flag from /podr/container/pipe/734d38c9635e_remitswift-app/stderr_4206414a79024c058b8176f95f6d43f9.
+2026-05-19T09:46:33.4630198Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:46:33.8108830Z Starting container: 734d38c9635e_remitswift-app.
+2026-05-19T09:46:33.8651844Z Starting watchers and probes.
+2026-05-19T09:46:33.8655356Z Starting metrics collection.
+2026-05-19T09:46:33.8657794Z Container is running.
+2026-05-19T09:46:33.8658880Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:46:33.9547574Z Container start method finished after 22916 ms.
+2026-05-19T09:46:33.9549804Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:46:33.9550361Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:47:23.7276469Z Container has finished running with exit code: 127.
+2026-05-19T09:47:23.7279873Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:47:23.7283593Z Stop and delete container. Retry count = 0
+2026-05-19T09:47:23.7284761Z Stopping container: 734d38c9635e_remitswift-app.
+2026-05-19T09:47:23.9139502Z Deleting container: 734d38c9635e_remitswift-app. Retry count = 0
+2026-05-19T09:47:26.8690122Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:47:26.8692228Z Container is terminated. Total time elapsed: 3141 ms.
+2026-05-19T09:47:26.8693785Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:47:26.8695010Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:46:08, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:26.8710550Z Site startup probe failed after 52.910043 seconds.
+2026-05-19T09:47:27.0349824Z AppInsights has been disabled for site: 'remitswift-app' beginning with the next cold start attempt on this instance due to repeated startup failures (2). This is to ensure auto attach is not interfering with the successful startup of the app. App insights can be re-enabled on this instance if a redeployment of the app content is performed or there is image update.
+2026-05-19T09:47:27.0386663Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:27.0560178Z Failed to start site. Revert by stopping site.
+2026-05-19T09:47:27.0563422Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:27.0566844Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:27.0567079Z Site: remitswift-app stopped.
+2026-05-19T09:47:27.0644915Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:27.3929470Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:47:27.5112464Z Site: remitswift-app will be blocked for 1 minutes till 05/19/2026 09:48:27
+2026-05-19T09:47:27.5125727Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: remitswift-app will be blocked for 1 minutes till 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:27.5307930Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:47:27 (UTC), DetailsLevel: WARN
+2026-05-19T09:47:27.6355881Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:47:27 (UTC), DetailsLevel: WARN
+2026-05-19T09:47:27.7266176Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:27.7266595Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:32.6156770Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:32.6157459Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:37.6713040Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:37.6714798Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:42.7826887Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:42.7827788Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:47.8270608Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:47.8332510Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:52.8961655Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:52.8962020Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:47:58.0267719Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:47:58.0268101Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:03.1062469Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:03.1069102Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:08.1977159Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:08.1979006Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:13.2556798Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:13.2557909Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:18.3631399Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:18.3632556Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:23.5117470Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:23.5117798Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:48:27.5228414Z Site: remitswift-app is unblocked.
+2026-05-19T09:48:28.6203204Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:29.5140993Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:48:27, DetailsLevel: WARN
+2026-05-19T09:48:29.5142440Z Container start method called.
+2026-05-19T09:48:29.5142989Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:48:29.5144184Z Establishing network.
+2026-05-19T09:48:29.5145466Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:48:53.9891618Z Container is starting.
+2026-05-19T09:48:53.9894819Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:48:53.9896743Z Establishing user namespace if not established already.
+2026-05-19T09:48:53.9901055Z Establishing network if not established already.
+2026-05-19T09:48:53.9904538Z Mounting volumes.
+2026-05-19T09:48:53.9967241Z Nested mountpoint 
+2026-05-19T09:48:54.0227270Z Nested mountpoint volatile/logs
+2026-05-19T09:48:54.0311973Z Nested mountpoint 
+2026-05-19T09:48:54.0324244Z Nested mountpoint 
+2026-05-19T09:48:54.0596713Z Nested mountpoint 
+2026-05-19T09:48:54.0757112Z Nested mountpoint 
+2026-05-19T09:48:54.0856183Z Nested mountpoint 
+2026-05-19T09:48:54.4287168Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:48:54.4289610Z Creating container.
+2026-05-19T09:48:54.4290942Z Creating pipes for streaming container io.
+2026-05-19T09:48:54.4293671Z Creating stdout named pipe at /podr/container/pipe/27c52d9a5a64_remitswift-app/stdout_8650e760998a4b14808f832c3d8119f9.
+2026-05-19T09:48:54.4302746Z Successfully created stdout named pipe at: /podr/container/pipe/27c52d9a5a64_remitswift-app/stdout_8650e760998a4b14808f832c3d8119f9.
+2026-05-19T09:48:54.4361958Z Opening named pipe /podr/container/pipe/27c52d9a5a64_remitswift-app/stdout_8650e760998a4b14808f832c3d8119f9 for reading in non-blocking mode.
+2026-05-19T09:48:54.4366975Z Successfully opened named pipe: /podr/container/pipe/27c52d9a5a64_remitswift-app/stdout_8650e760998a4b14808f832c3d8119f9.
+2026-05-19T09:48:54.4369860Z Successfully removed non-blocking flag from /podr/container/pipe/27c52d9a5a64_remitswift-app/stdout_8650e760998a4b14808f832c3d8119f9.
+2026-05-19T09:48:54.4372139Z Creating stderr named pipe at /podr/container/pipe/27c52d9a5a64_remitswift-app/stderr_d4701c09d2ae4705918548aa4a009b54.
+2026-05-19T09:48:54.4377119Z Successfully created stderr named pipe at: /podr/container/pipe/27c52d9a5a64_remitswift-app/stderr_d4701c09d2ae4705918548aa4a009b54.
+2026-05-19T09:48:54.4379375Z Opening named pipe /podr/container/pipe/27c52d9a5a64_remitswift-app/stderr_d4701c09d2ae4705918548aa4a009b54 for reading in non-blocking mode.
+2026-05-19T09:48:54.4381077Z Successfully opened named pipe: /podr/container/pipe/27c52d9a5a64_remitswift-app/stderr_d4701c09d2ae4705918548aa4a009b54.
+2026-05-19T09:48:54.4383642Z Successfully removed non-blocking flag from /podr/container/pipe/27c52d9a5a64_remitswift-app/stderr_d4701c09d2ae4705918548aa4a009b54.
+2026-05-19T09:48:54.4385490Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:48:54.7605388Z Starting container: 27c52d9a5a64_remitswift-app.
+2026-05-19T09:48:54.8153652Z Starting watchers and probes.
+2026-05-19T09:48:54.8157360Z Starting metrics collection.
+2026-05-19T09:48:54.8170846Z Container is running.
+2026-05-19T09:48:54.8353921Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:48:54.9553024Z Container start method finished after 25440 ms.
+2026-05-19T09:48:54.9557245Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:48:54.9559873Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:49:33.4551617Z Container has finished running with exit code: 127.
+2026-05-19T09:49:33.4552949Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:49:33.4601374Z Stop and delete container. Retry count = 0
+2026-05-19T09:49:33.4603257Z Stopping container: 27c52d9a5a64_remitswift-app.
+2026-05-19T09:49:33.5106596Z Deleting container: 27c52d9a5a64_remitswift-app. Retry count = 0
+2026-05-19T09:49:36.4540963Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:49:36.4542994Z Container is terminated. Total time elapsed: 2998 ms.
+2026-05-19T09:49:36.4544399Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:49:36.4546454Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:47:27, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:36.4623292Z Site startup probe failed after 41.5056786 seconds.
+2026-05-19T09:49:36.5800908Z AppInsights has been re-enabled for site: 'remitswift-app' because disabling it did not help the site start successfully (failures: 3). AppInsights was not the cause of the startup failure.
+2026-05-19T09:49:36.5809937Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:36.5906105Z Failed to start site. Revert by stopping site.
+2026-05-19T09:49:36.5918730Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:36.5996039Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:36.5996274Z Site: remitswift-app stopped.
+2026-05-19T09:49:36.6064670Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:37.0465399Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:49:37.1229148Z Site: remitswift-app will be blocked for 1 minutes till 05/19/2026 09:50:37
+2026-05-19T09:49:37.1231315Z State: Blocked, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site: remitswift-app will be blocked for 1 minutes till 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:49:37.1235899Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:49:37 (UTC), DetailsLevel: WARN
+2026-05-19T09:49:37.2107804Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:49:37 (UTC), DetailsLevel: WARN
+2026-05-19T09:49:42.2904280Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:49:42.2904685Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:49:47.3727423Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:49:47.3727828Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:49:52.4200650Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:49:52.4201448Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:49:57.4704688Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:49:57.4705774Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:02.5637418Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:02.5675395Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:07.7484029Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:07.7484345Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:12.7774404Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:12.7774698Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:17.8802713Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:17.8803056Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:22.9260695Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:22.9261384Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:28.0236299Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:28.0236608Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:33.0718524Z State: Blocked, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:33.0719305Z Start site prohibitted because the site is being blocked.
+2026-05-19T09:50:37.1220709Z Site: remitswift-app is unblocked.
+2026-05-19T09:50:38.1869031Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:39.0146958Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:50:37, DetailsLevel: WARN
+2026-05-19T09:50:39.0151672Z Container start method called.
+2026-05-19T09:50:39.0152780Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:50:39.0157389Z Establishing network.
+2026-05-19T09:50:39.0159445Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:51:02.1417827Z Container is starting.
+2026-05-19T09:51:02.1419426Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:51:02.1452866Z Establishing user namespace if not established already.
+2026-05-19T09:51:02.1455208Z Establishing network if not established already.
+2026-05-19T09:51:02.1457111Z Mounting volumes.
+2026-05-19T09:51:02.1459373Z Nested mountpoint 
+2026-05-19T09:51:02.1564428Z Nested mountpoint volatile/logs
+2026-05-19T09:51:02.1684184Z Nested mountpoint 
+2026-05-19T09:51:02.1851156Z Nested mountpoint 
+2026-05-19T09:51:02.2147317Z Nested mountpoint 
+2026-05-19T09:51:02.2235763Z Nested mountpoint 
+2026-05-19T09:51:02.2786546Z Nested mountpoint 
+2026-05-19T09:51:02.5993880Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:51:02.5997812Z Creating container.
+2026-05-19T09:51:02.6001931Z Creating pipes for streaming container io.
+2026-05-19T09:51:02.6003867Z Creating stdout named pipe at /podr/container/pipe/f671627248ba_remitswift-app/stdout_3a74bbe6bf4440a2b6895139f52ab1b4.
+2026-05-19T09:51:02.6007590Z Successfully created stdout named pipe at: /podr/container/pipe/f671627248ba_remitswift-app/stdout_3a74bbe6bf4440a2b6895139f52ab1b4.
+2026-05-19T09:51:02.6009747Z Opening named pipe /podr/container/pipe/f671627248ba_remitswift-app/stdout_3a74bbe6bf4440a2b6895139f52ab1b4 for reading in non-blocking mode.
+2026-05-19T09:51:02.6011260Z Successfully opened named pipe: /podr/container/pipe/f671627248ba_remitswift-app/stdout_3a74bbe6bf4440a2b6895139f52ab1b4.
+2026-05-19T09:51:02.6012313Z Successfully removed non-blocking flag from /podr/container/pipe/f671627248ba_remitswift-app/stdout_3a74bbe6bf4440a2b6895139f52ab1b4.
+2026-05-19T09:51:02.6013975Z Creating stderr named pipe at /podr/container/pipe/f671627248ba_remitswift-app/stderr_5b1690d301cf471dbddd437f98b2fbc3.
+2026-05-19T09:51:02.6016310Z Successfully created stderr named pipe at: /podr/container/pipe/f671627248ba_remitswift-app/stderr_5b1690d301cf471dbddd437f98b2fbc3.
+2026-05-19T09:51:02.6017514Z Opening named pipe /podr/container/pipe/f671627248ba_remitswift-app/stderr_5b1690d301cf471dbddd437f98b2fbc3 for reading in non-blocking mode.
+2026-05-19T09:51:02.6018886Z Successfully opened named pipe: /podr/container/pipe/f671627248ba_remitswift-app/stderr_5b1690d301cf471dbddd437f98b2fbc3.
+2026-05-19T09:51:02.6114008Z Successfully removed non-blocking flag from /podr/container/pipe/f671627248ba_remitswift-app/stderr_5b1690d301cf471dbddd437f98b2fbc3.
+2026-05-19T09:51:02.6176676Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:51:02.9852504Z Starting container: f671627248ba_remitswift-app.
+2026-05-19T09:51:03.0362070Z Starting watchers and probes.
+2026-05-19T09:51:03.0365083Z Starting metrics collection.
+2026-05-19T09:51:03.0366911Z Container is running.
+2026-05-19T09:51:03.0519965Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:51:03.1388198Z Container start method finished after 24123 ms.
+2026-05-19T09:51:03.1390414Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:51:03.1390899Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:51:39.0641917Z Container has finished running with exit code: 127.
+2026-05-19T09:51:39.0643984Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:51:39.0651477Z Stop and delete container. Retry count = 0
+2026-05-19T09:51:39.0652798Z Stopping container: f671627248ba_remitswift-app.
+2026-05-19T09:51:39.1055351Z Deleting container: f671627248ba_remitswift-app. Retry count = 0
+2026-05-19T09:51:42.2352411Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:51:42.2357624Z Container is terminated. Total time elapsed: 3170 ms.
+2026-05-19T09:51:42.2374954Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:51:42.2376744Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:49:36, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:51:42.2393306Z Site startup probe failed after 39.0996443 seconds.
+2026-05-19T09:51:42.3583131Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:51:42.3661916Z Failed to start site. Revert by stopping site.
+2026-05-19T09:51:42.3666438Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:51:42.3671085Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:51:42.3671301Z Site: remitswift-app stopped.
+2026-05-19T09:53:31.5666971Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:53:42, DetailsLevel: WARN
+2026-05-19T09:53:32.5298444Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site is blocked due to multiple, consecutive cold start failures. Site scheduled to be unblocked at 05/19/2026 09:53:42, DetailsLevel: WARN
+2026-05-19T09:53:32.5302652Z Container start method called.
+2026-05-19T09:53:32.5315703Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:53:32.5319293Z Establishing network.
+2026-05-19T09:53:32.5328370Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:53:32.7576685Z Container is starting.
+2026-05-19T09:53:32.7683509Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:53:32.7685642Z Establishing user namespace if not established already.
+2026-05-19T09:53:32.7687101Z Establishing network if not established already.
+2026-05-19T09:53:32.7688512Z Mounting volumes.
+2026-05-19T09:53:32.7735285Z Nested mountpoint 
+2026-05-19T09:53:32.7833028Z Nested mountpoint volatile/logs
+2026-05-19T09:53:32.8016160Z Nested mountpoint 
+2026-05-19T09:53:32.8119332Z Nested mountpoint 
+2026-05-19T09:53:32.8125894Z Nested mountpoint 
+2026-05-19T09:53:32.8216746Z Nested mountpoint 
+2026-05-19T09:53:32.8427747Z Nested mountpoint 
+2026-05-19T09:53:33.8470787Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:53:33.8472244Z Creating container.
+2026-05-19T09:53:33.8473596Z Creating pipes for streaming container io.
+2026-05-19T09:53:33.8483566Z Creating stdout named pipe at /podr/container/pipe/0a6225273e61_remitswift-app/stdout_402d4e282b024512bc3c1537021d5376.
+2026-05-19T09:53:33.8486435Z Successfully created stdout named pipe at: /podr/container/pipe/0a6225273e61_remitswift-app/stdout_402d4e282b024512bc3c1537021d5376.
+2026-05-19T09:53:33.8491076Z Opening named pipe /podr/container/pipe/0a6225273e61_remitswift-app/stdout_402d4e282b024512bc3c1537021d5376 for reading in non-blocking mode.
+2026-05-19T09:53:33.8493765Z Successfully opened named pipe: /podr/container/pipe/0a6225273e61_remitswift-app/stdout_402d4e282b024512bc3c1537021d5376.
+2026-05-19T09:53:33.8494966Z Successfully removed non-blocking flag from /podr/container/pipe/0a6225273e61_remitswift-app/stdout_402d4e282b024512bc3c1537021d5376.
+2026-05-19T09:53:33.8563709Z Creating stderr named pipe at /podr/container/pipe/0a6225273e61_remitswift-app/stderr_ca8bee9609a8443eb3f78da7ff4fbac9.
+2026-05-19T09:53:33.8565628Z Successfully created stderr named pipe at: /podr/container/pipe/0a6225273e61_remitswift-app/stderr_ca8bee9609a8443eb3f78da7ff4fbac9.
+2026-05-19T09:53:33.8566953Z Opening named pipe /podr/container/pipe/0a6225273e61_remitswift-app/stderr_ca8bee9609a8443eb3f78da7ff4fbac9 for reading in non-blocking mode.
+2026-05-19T09:53:33.8569062Z Successfully opened named pipe: /podr/container/pipe/0a6225273e61_remitswift-app/stderr_ca8bee9609a8443eb3f78da7ff4fbac9.
+2026-05-19T09:53:33.8570233Z Successfully removed non-blocking flag from /podr/container/pipe/0a6225273e61_remitswift-app/stderr_ca8bee9609a8443eb3f78da7ff4fbac9.
+2026-05-19T09:53:33.8578424Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:53:34.3658302Z Starting container: 0a6225273e61_remitswift-app.
+2026-05-19T09:53:34.4814852Z Starting watchers and probes.
+2026-05-19T09:53:34.4817902Z Starting metrics collection.
+2026-05-19T09:53:34.4819389Z Container is running.
+2026-05-19T09:53:34.4884836Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:53:34.6581282Z Container start method finished after 2127 ms.
+2026-05-19T09:53:34.6595931Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:53:34.6601870Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:54:20.8274230Z Container has finished running with exit code: 127.
+2026-05-19T09:54:20.8275539Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:54:20.8279416Z Stop and delete container. Retry count = 0
+2026-05-19T09:54:20.8319276Z Stopping container: 0a6225273e61_remitswift-app.
+2026-05-19T09:54:20.8807924Z Deleting container: 0a6225273e61_remitswift-app. Retry count = 0
+2026-05-19T09:54:23.7173556Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:54:23.7178396Z Container is terminated. Total time elapsed: 2889 ms.
+2026-05-19T09:54:23.7182772Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:54:23.7191592Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:51:42, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:54:23.7278015Z Site startup probe failed after 49.0591295 seconds.
+2026-05-19T09:54:23.8603617Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:54:23.8701903Z Failed to start site. Revert by stopping site.
+2026-05-19T09:54:23.8704935Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:54:23.8712743Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:54:23.8712958Z Site: remitswift-app stopped.
+2026-05-19T09:54:49.6029027Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:54:24 (UTC), DetailsLevel: ERR
+2026-05-19T09:54:50.6150161Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:54:24 (UTC), DetailsLevel: ERR
+2026-05-19T09:54:50.6151900Z Container start method called.
+2026-05-19T09:54:50.6152444Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:54:50.6360483Z Establishing network.
+2026-05-19T09:54:50.6362204Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:54:50.8608544Z Container is starting.
+2026-05-19T09:54:50.8611694Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:54:50.8613269Z Establishing user namespace if not established already.
+2026-05-19T09:54:50.8614476Z Establishing network if not established already.
+2026-05-19T09:54:50.8616488Z Mounting volumes.
+2026-05-19T09:54:50.8618414Z Nested mountpoint 
+2026-05-19T09:54:50.8636681Z Nested mountpoint volatile/logs
+2026-05-19T09:54:50.9088364Z Nested mountpoint 
+2026-05-19T09:54:50.9097573Z Nested mountpoint 
+2026-05-19T09:54:50.9622128Z Nested mountpoint 
+2026-05-19T09:54:50.9629420Z Nested mountpoint 
+2026-05-19T09:54:50.9647294Z Nested mountpoint 
+2026-05-19T09:54:51.4293217Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:54:51.4763402Z Creating container.
+2026-05-19T09:54:51.4764813Z Creating pipes for streaming container io.
+2026-05-19T09:54:51.4766030Z Creating stdout named pipe at /podr/container/pipe/316e768ff664_remitswift-app/stdout_4f2cfec4e2c24010b51a9852388d3789.
+2026-05-19T09:54:51.4768803Z Successfully created stdout named pipe at: /podr/container/pipe/316e768ff664_remitswift-app/stdout_4f2cfec4e2c24010b51a9852388d3789.
+2026-05-19T09:54:51.4769756Z Opening named pipe /podr/container/pipe/316e768ff664_remitswift-app/stdout_4f2cfec4e2c24010b51a9852388d3789 for reading in non-blocking mode.
+2026-05-19T09:54:51.4770990Z Successfully opened named pipe: /podr/container/pipe/316e768ff664_remitswift-app/stdout_4f2cfec4e2c24010b51a9852388d3789.
+2026-05-19T09:54:51.4771943Z Successfully removed non-blocking flag from /podr/container/pipe/316e768ff664_remitswift-app/stdout_4f2cfec4e2c24010b51a9852388d3789.
+2026-05-19T09:54:51.4773432Z Creating stderr named pipe at /podr/container/pipe/316e768ff664_remitswift-app/stderr_d8ab9f6ea669430fb5cfc462dea8d418.
+2026-05-19T09:54:51.4775321Z Successfully created stderr named pipe at: /podr/container/pipe/316e768ff664_remitswift-app/stderr_d8ab9f6ea669430fb5cfc462dea8d418.
+2026-05-19T09:54:51.4776416Z Opening named pipe /podr/container/pipe/316e768ff664_remitswift-app/stderr_d8ab9f6ea669430fb5cfc462dea8d418 for reading in non-blocking mode.
+2026-05-19T09:54:51.4777609Z Successfully opened named pipe: /podr/container/pipe/316e768ff664_remitswift-app/stderr_d8ab9f6ea669430fb5cfc462dea8d418.
+2026-05-19T09:54:51.4778572Z Successfully removed non-blocking flag from /podr/container/pipe/316e768ff664_remitswift-app/stderr_d8ab9f6ea669430fb5cfc462dea8d418.
+2026-05-19T09:54:51.4951462Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:54:52.1036606Z Starting container: 316e768ff664_remitswift-app.
+2026-05-19T09:54:52.2784371Z Starting watchers and probes.
+2026-05-19T09:54:52.2864005Z Starting metrics collection.
+2026-05-19T09:54:52.2866646Z Container is running.
+2026-05-19T09:54:52.2872707Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:54:52.6520889Z Container start method finished after 2036 ms.
+2026-05-19T09:54:52.6527824Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:54:52.6589362Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:55:29.7612797Z Container has finished running with exit code: 127.
+2026-05-19T09:55:29.7618921Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:55:29.7684917Z Stop and delete container. Retry count = 0
+2026-05-19T09:55:29.7686424Z Stopping container: 316e768ff664_remitswift-app.
+2026-05-19T09:55:29.8082721Z Deleting container: 316e768ff664_remitswift-app. Retry count = 0
+2026-05-19T09:55:32.4895334Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:55:32.4897434Z Container is terminated. Total time elapsed: 2727 ms.
+2026-05-19T09:55:32.4898593Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:55:32.4916596Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:54:23, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:55:32.4995613Z Site startup probe failed after 39.8400637 seconds.
+2026-05-19T09:55:32.6329183Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:55:32.6358783Z Failed to start site. Revert by stopping site.
+2026-05-19T09:55:32.6359749Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:55:32.6362186Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:55:32.6362426Z Site: remitswift-app stopped.
+2026-05-19T09:55:53.2256657Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:55:33 (UTC), DetailsLevel: ERR
+2026-05-19T09:55:53.9956449Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:55:33 (UTC), DetailsLevel: ERR
+2026-05-19T09:55:53.9961096Z Container start method called.
+2026-05-19T09:55:53.9963059Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:55:53.9968520Z Establishing network.
+2026-05-19T09:55:54.0061052Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:56:16.8143053Z Container is starting.
+2026-05-19T09:56:16.8144620Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:56:16.8146045Z Establishing user namespace if not established already.
+2026-05-19T09:56:16.8148294Z Establishing network if not established already.
+2026-05-19T09:56:16.8150012Z Mounting volumes.
+2026-05-19T09:56:16.8151588Z Nested mountpoint 
+2026-05-19T09:56:16.8171911Z Nested mountpoint volatile/logs
+2026-05-19T09:56:16.8454873Z Nested mountpoint 
+2026-05-19T09:56:16.8464193Z Nested mountpoint 
+2026-05-19T09:56:16.8469974Z Nested mountpoint 
+2026-05-19T09:56:16.9131858Z Nested mountpoint 
+2026-05-19T09:56:16.9516027Z Nested mountpoint 
+2026-05-19T09:56:17.2495285Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:56:17.2564696Z Creating container.
+2026-05-19T09:56:17.2570265Z Creating pipes for streaming container io.
+2026-05-19T09:56:17.2606098Z Creating stdout named pipe at /podr/container/pipe/7d4d2909e77d_remitswift-app/stdout_0bcb61e2b1a94fb6b77fabce23803236.
+2026-05-19T09:56:17.2613882Z Successfully created stdout named pipe at: /podr/container/pipe/7d4d2909e77d_remitswift-app/stdout_0bcb61e2b1a94fb6b77fabce23803236.
+2026-05-19T09:56:17.2619489Z Opening named pipe /podr/container/pipe/7d4d2909e77d_remitswift-app/stdout_0bcb61e2b1a94fb6b77fabce23803236 for reading in non-blocking mode.
+2026-05-19T09:56:17.2625604Z Successfully opened named pipe: /podr/container/pipe/7d4d2909e77d_remitswift-app/stdout_0bcb61e2b1a94fb6b77fabce23803236.
+2026-05-19T09:56:17.2632187Z Successfully removed non-blocking flag from /podr/container/pipe/7d4d2909e77d_remitswift-app/stdout_0bcb61e2b1a94fb6b77fabce23803236.
+2026-05-19T09:56:17.2679441Z Creating stderr named pipe at /podr/container/pipe/7d4d2909e77d_remitswift-app/stderr_dfe6d3170cc049e3bb68edbc7966b7bb.
+2026-05-19T09:56:17.2687844Z Successfully created stderr named pipe at: /podr/container/pipe/7d4d2909e77d_remitswift-app/stderr_dfe6d3170cc049e3bb68edbc7966b7bb.
+2026-05-19T09:56:17.2689522Z Opening named pipe /podr/container/pipe/7d4d2909e77d_remitswift-app/stderr_dfe6d3170cc049e3bb68edbc7966b7bb for reading in non-blocking mode.
+2026-05-19T09:56:17.2690926Z Successfully opened named pipe: /podr/container/pipe/7d4d2909e77d_remitswift-app/stderr_dfe6d3170cc049e3bb68edbc7966b7bb.
+2026-05-19T09:56:17.2691972Z Successfully removed non-blocking flag from /podr/container/pipe/7d4d2909e77d_remitswift-app/stderr_dfe6d3170cc049e3bb68edbc7966b7bb.
+2026-05-19T09:56:17.2707904Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:56:17.6273875Z Starting container: 7d4d2909e77d_remitswift-app.
+2026-05-19T09:56:17.7410047Z Starting watchers and probes.
+2026-05-19T09:56:17.7492439Z Starting metrics collection.
+2026-05-19T09:56:17.7665226Z Container is running.
+2026-05-19T09:56:17.7666305Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:56:17.8143172Z Container start method finished after 23817 ms.
+2026-05-19T09:56:17.8145792Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:56:17.8146099Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:56:55.9584213Z Container has finished running with exit code: 127.
+2026-05-19T09:56:55.9585821Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:56:55.9653712Z Stop and delete container. Retry count = 0
+2026-05-19T09:56:55.9656182Z Stopping container: 7d4d2909e77d_remitswift-app.
+2026-05-19T09:56:56.0036923Z Deleting container: 7d4d2909e77d_remitswift-app. Retry count = 0
+2026-05-19T09:56:58.6066038Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:56:58.6068731Z Container is terminated. Total time elapsed: 2648 ms.
+2026-05-19T09:56:58.6069869Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:56:58.6071241Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:55:32, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:58.6161635Z Site startup probe failed after 40.8010603 seconds.
+2026-05-19T09:56:58.7584192Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:58.7665308Z Failed to start site. Revert by stopping site.
+2026-05-19T09:56:58.7667106Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:58.7675665Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:58.7675893Z Site: remitswift-app stopped.
+2026-05-19T09:56:58.7769148Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:59.1036826Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:56:59.2161765Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:56:59 (UTC), DetailsLevel: ERR
+2026-05-19T09:56:59.3326009Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:56:59 (UTC), DetailsLevel: ERR
+2026-05-19T09:56:59.3923688Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:56:59 (UTC), DetailsLevel: ERR
+2026-05-19T09:57:00.2142857Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:56:59 (UTC), DetailsLevel: ERR
+2026-05-19T09:57:00.2147462Z Container start method called.
+2026-05-19T09:57:00.2149616Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:57:00.2154056Z Establishing network.
+2026-05-19T09:57:00.2221408Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:57:24.2975757Z Container is starting.
+2026-05-19T09:57:24.2977960Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:57:24.2979219Z Establishing user namespace if not established already.
+2026-05-19T09:57:24.3067882Z Establishing network if not established already.
+2026-05-19T09:57:24.3070825Z Mounting volumes.
+2026-05-19T09:57:24.3072973Z Nested mountpoint 
+2026-05-19T09:57:24.3106120Z Nested mountpoint volatile/logs
+2026-05-19T09:57:24.3269391Z Nested mountpoint 
+2026-05-19T09:57:24.3276311Z Nested mountpoint 
+2026-05-19T09:57:24.3281059Z Nested mountpoint 
+2026-05-19T09:57:24.3565223Z Nested mountpoint 
+2026-05-19T09:57:24.4593045Z Nested mountpoint 
+2026-05-19T09:57:24.7057050Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:57:24.7058343Z Creating container.
+2026-05-19T09:57:24.7059448Z Creating pipes for streaming container io.
+2026-05-19T09:57:24.7063520Z Creating stdout named pipe at /podr/container/pipe/414a779589ec_remitswift-app/stdout_4273fec52cd247a5ac5bb13da6e0d323.
+2026-05-19T09:57:24.7065762Z Successfully created stdout named pipe at: /podr/container/pipe/414a779589ec_remitswift-app/stdout_4273fec52cd247a5ac5bb13da6e0d323.
+2026-05-19T09:57:24.7066781Z Opening named pipe /podr/container/pipe/414a779589ec_remitswift-app/stdout_4273fec52cd247a5ac5bb13da6e0d323 for reading in non-blocking mode.
+2026-05-19T09:57:24.7068097Z Successfully opened named pipe: /podr/container/pipe/414a779589ec_remitswift-app/stdout_4273fec52cd247a5ac5bb13da6e0d323.
+2026-05-19T09:57:24.7069164Z Successfully removed non-blocking flag from /podr/container/pipe/414a779589ec_remitswift-app/stdout_4273fec52cd247a5ac5bb13da6e0d323.
+2026-05-19T09:57:24.7070825Z Creating stderr named pipe at /podr/container/pipe/414a779589ec_remitswift-app/stderr_8ca0f3b1ff7e44e5b058ee4b5078a67e.
+2026-05-19T09:57:24.7073540Z Successfully created stderr named pipe at: /podr/container/pipe/414a779589ec_remitswift-app/stderr_8ca0f3b1ff7e44e5b058ee4b5078a67e.
+2026-05-19T09:57:24.7074669Z Opening named pipe /podr/container/pipe/414a779589ec_remitswift-app/stderr_8ca0f3b1ff7e44e5b058ee4b5078a67e for reading in non-blocking mode.
+2026-05-19T09:57:24.7075903Z Successfully opened named pipe: /podr/container/pipe/414a779589ec_remitswift-app/stderr_8ca0f3b1ff7e44e5b058ee4b5078a67e.
+2026-05-19T09:57:24.7076979Z Successfully removed non-blocking flag from /podr/container/pipe/414a779589ec_remitswift-app/stderr_8ca0f3b1ff7e44e5b058ee4b5078a67e.
+2026-05-19T09:57:24.7078293Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:57:24.9972894Z Starting container: 414a779589ec_remitswift-app.
+2026-05-19T09:57:25.0665967Z Starting watchers and probes.
+2026-05-19T09:57:25.0673253Z Starting metrics collection.
+2026-05-19T09:57:25.0675274Z Container is running.
+2026-05-19T09:57:25.0676133Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:57:25.3716121Z Container start method finished after 25156 ms.
+2026-05-19T09:57:25.3722328Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:57:25.3722816Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:58:02.4891702Z Container has finished running with exit code: 127.
+2026-05-19T09:58:02.4899307Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:58:02.4912859Z Stop and delete container. Retry count = 0
+2026-05-19T09:58:02.4913985Z Stopping container: 414a779589ec_remitswift-app.
+2026-05-19T09:58:02.5669529Z Deleting container: 414a779589ec_remitswift-app. Retry count = 0
+2026-05-19T09:58:06.6697825Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:58:06.6701142Z Container is terminated. Total time elapsed: 4179 ms.
+2026-05-19T09:58:06.6702385Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:58:06.6712772Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:56:58, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:58:06.6797781Z Site startup probe failed after 41.3063685 seconds.
+2026-05-19T09:58:06.9185428Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:58:06.9201999Z Failed to start site. Revert by stopping site.
+2026-05-19T09:58:06.9204795Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:58:06.9207735Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:58:06.9207947Z Site: remitswift-app stopped.
+2026-05-19T09:58:52.5973610Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:58:07 (UTC), DetailsLevel: WARN
+2026-05-19T09:58:53.3942561Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:58:07 (UTC), DetailsLevel: WARN
+2026-05-19T09:58:53.3943998Z Container start method called.
+2026-05-19T09:58:53.3944547Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.5:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:58:53.3945723Z Establishing network.
+2026-05-19T09:58:53.3946956Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T09:59:15.7626586Z Container is starting.
+2026-05-19T09:59:15.7630547Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T09:59:15.7632203Z Establishing user namespace if not established already.
+2026-05-19T09:59:15.7633726Z Establishing network if not established already.
+2026-05-19T09:59:15.7695498Z Mounting volumes.
+2026-05-19T09:59:15.7699241Z Nested mountpoint 
+2026-05-19T09:59:15.7726219Z Nested mountpoint volatile/logs
+2026-05-19T09:59:15.7886418Z Nested mountpoint 
+2026-05-19T09:59:15.7897722Z Nested mountpoint 
+2026-05-19T09:59:15.7904267Z Nested mountpoint 
+2026-05-19T09:59:15.7913586Z Nested mountpoint 
+2026-05-19T09:59:15.8098049Z Nested mountpoint 
+2026-05-19T09:59:16.1330470Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T09:59:16.1331954Z Creating container.
+2026-05-19T09:59:16.1333036Z Creating pipes for streaming container io.
+2026-05-19T09:59:16.1334091Z Creating stdout named pipe at /podr/container/pipe/39df7174f6f6_remitswift-app/stdout_c23891b265d64d4886ca6536ca602613.
+2026-05-19T09:59:16.1336156Z Successfully created stdout named pipe at: /podr/container/pipe/39df7174f6f6_remitswift-app/stdout_c23891b265d64d4886ca6536ca602613.
+2026-05-19T09:59:16.1337167Z Opening named pipe /podr/container/pipe/39df7174f6f6_remitswift-app/stdout_c23891b265d64d4886ca6536ca602613 for reading in non-blocking mode.
+2026-05-19T09:59:16.1338384Z Successfully opened named pipe: /podr/container/pipe/39df7174f6f6_remitswift-app/stdout_c23891b265d64d4886ca6536ca602613.
+2026-05-19T09:59:16.1409228Z Successfully removed non-blocking flag from /podr/container/pipe/39df7174f6f6_remitswift-app/stdout_c23891b265d64d4886ca6536ca602613.
+2026-05-19T09:59:16.1411715Z Creating stderr named pipe at /podr/container/pipe/39df7174f6f6_remitswift-app/stderr_8b59f91283b74c65a36d11d72826360f.
+2026-05-19T09:59:16.1413955Z Successfully created stderr named pipe at: /podr/container/pipe/39df7174f6f6_remitswift-app/stderr_8b59f91283b74c65a36d11d72826360f.
+2026-05-19T09:59:16.1415553Z Opening named pipe /podr/container/pipe/39df7174f6f6_remitswift-app/stderr_8b59f91283b74c65a36d11d72826360f for reading in non-blocking mode.
+2026-05-19T09:59:16.1416876Z Successfully opened named pipe: /podr/container/pipe/39df7174f6f6_remitswift-app/stderr_8b59f91283b74c65a36d11d72826360f.
+2026-05-19T09:59:16.1418749Z Successfully removed non-blocking flag from /podr/container/pipe/39df7174f6f6_remitswift-app/stderr_8b59f91283b74c65a36d11d72826360f.
+2026-05-19T09:59:16.1422595Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T09:59:16.4768970Z Starting container: 39df7174f6f6_remitswift-app.
+2026-05-19T09:59:16.5327967Z Starting watchers and probes.
+2026-05-19T09:59:16.5335298Z Starting metrics collection.
+2026-05-19T09:59:16.5555540Z Container is running.
+2026-05-19T09:59:16.5557282Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:59:16.6744934Z Container start method finished after 23279 ms.
+2026-05-19T09:59:16.6746868Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T09:59:16.6747433Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-05-19T09:59:52.8916756Z Container has finished running with exit code: 127.
+2026-05-19T09:59:52.8918214Z Container is terminating. Grace period: 5 seconds.
+2026-05-19T09:59:52.8922406Z Stop and delete container. Retry count = 0
+2026-05-19T09:59:52.8923462Z Stopping container: 39df7174f6f6_remitswift-app.
+2026-05-19T09:59:52.9393561Z Deleting container: 39df7174f6f6_remitswift-app. Retry count = 0
+2026-05-19T09:59:55.5885968Z Container spec TerminationMessagePolicy  path 
+2026-05-19T09:59:55.5889531Z Container is terminated. Total time elapsed: 2696 ms.
+2026-05-19T09:59:55.5891897Z Site container: remitswift-app terminated during site startup.
+2026-05-19T09:59:55.5893145Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:58:06, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:55.5979387Z Site startup probe failed after 38.9190123 seconds.
+2026-05-19T09:59:55.7430235Z State: Stopping, Action: CancellingStartup, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:55.7596121Z Failed to start site. Revert by stopping site.
+2026-05-19T09:59:55.7633301Z State: Stopping, Action: StoppingSite, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:55.7639959Z State: Stopping, Action: StoppingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:55.7640151Z Site: remitswift-app stopped.
+2026-05-19T09:59:55.7668797Z State: Stopping, Action: UnmountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:56.0386188Z State: Stopping, Action: StoppingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site container: remitswift-app terminated during site startup. Cancelling site startup., DetailsLevel: ERR
+2026-05-19T09:59:56.3140565Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:59:56 (UTC), DetailsLevel: ERR
+2026-05-19T09:59:56.3937460Z State: Stopped, Action: None, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:59:56 (UTC), DetailsLevel: ERR
+2026-05-19T10:00:10.7049697Z State: Starting, Action: EstablishingSiteNetworks, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:59:56 (UTC), DetailsLevel: ERR
+2026-05-19T10:00:11.6944381Z State: Starting, Action: StartingSiteContainers, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Site stopped at 05/19/2026 09:59:56 (UTC), DetailsLevel: ERR
+2026-05-19T10:00:11.6946669Z Container start method called.
+2026-05-19T10:00:11.6948454Z State: Starting, Action: PullingImage, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pulling image 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod for remitswift-app., DetailsLevel: INFO
+2026-05-19T10:00:11.6950111Z Establishing network.
+2026-05-19T10:00:11.7005206Z Pulling image: appsvc/node:22-lts_20260504.4.tuxprod.
+2026-05-19T10:00:35.4976406Z Container is starting.
+2026-05-19T10:00:35.4977951Z State: Starting, Action: MountingVolumes, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Mounting volumes for remitswift-app., DetailsLevel: INFO
+2026-05-19T10:00:35.4979268Z Establishing user namespace if not established already.
+2026-05-19T10:00:35.4980741Z Establishing network if not established already.
+2026-05-19T10:00:35.4981954Z Mounting volumes.
+2026-05-19T10:00:35.4984388Z Nested mountpoint 
+2026-05-19T10:00:35.5063210Z Nested mountpoint volatile/logs
+2026-05-19T10:00:35.5175505Z Nested mountpoint 
+2026-05-19T10:00:35.5183026Z Nested mountpoint 
+2026-05-19T10:00:35.5483364Z Nested mountpoint 
+2026-05-19T10:00:35.5491805Z Nested mountpoint 
+2026-05-19T10:00:35.5565043Z Nested mountpoint 
+2026-05-19T10:00:35.8996919Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Finished pulling container image and mounting volumes for remitswift-app. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-05-19T10:00:35.9012685Z Creating container.
+2026-05-19T10:00:35.9017172Z Creating pipes for streaming container io.
+2026-05-19T10:00:35.9021073Z Creating stdout named pipe at /podr/container/pipe/7af0babc07c4_remitswift-app/stdout_b33a812cf08f4e3b84261281641a23ea.
+2026-05-19T10:00:35.9034080Z Successfully created stdout named pipe at: /podr/container/pipe/7af0babc07c4_remitswift-app/stdout_b33a812cf08f4e3b84261281641a23ea.
+2026-05-19T10:00:35.9037046Z Opening named pipe /podr/container/pipe/7af0babc07c4_remitswift-app/stdout_b33a812cf08f4e3b84261281641a23ea for reading in non-blocking mode.
+2026-05-19T10:00:35.9042620Z Successfully opened named pipe: /podr/container/pipe/7af0babc07c4_remitswift-app/stdout_b33a812cf08f4e3b84261281641a23ea.
+2026-05-19T10:00:35.9045615Z Successfully removed non-blocking flag from /podr/container/pipe/7af0babc07c4_remitswift-app/stdout_b33a812cf08f4e3b84261281641a23ea.
+2026-05-19T10:00:35.9115277Z Creating stderr named pipe at /podr/container/pipe/7af0babc07c4_remitswift-app/stderr_3680881c575c4bff83298f3992065615.
+2026-05-19T10:00:35.9119396Z Successfully created stderr named pipe at: /podr/container/pipe/7af0babc07c4_remitswift-app/stderr_3680881c575c4bff83298f3992065615.
+2026-05-19T10:00:35.9124077Z Opening named pipe /podr/container/pipe/7af0babc07c4_remitswift-app/stderr_3680881c575c4bff83298f3992065615 for reading in non-blocking mode.
+2026-05-19T10:00:35.9127865Z Successfully opened named pipe: /podr/container/pipe/7af0babc07c4_remitswift-app/stderr_3680881c575c4bff83298f3992065615.
+2026-05-19T10:00:35.9131817Z Successfully removed non-blocking flag from /podr/container/pipe/7af0babc07c4_remitswift-app/stderr_3680881c575c4bff83298f3992065615.
+2026-05-19T10:00:35.9192991Z Creating container with image: appsvc/node:22-lts_20260504.4.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20260504.4.tuxprod
+2026-05-19T10:00:36.3111176Z Starting container: 7af0babc07c4_remitswift-app.
+2026-05-19T10:00:36.3523268Z Starting watchers and probes.
+2026-05-19T10:00:36.3527088Z Starting metrics collection.
+2026-05-19T10:00:36.3528816Z Container is running.
+2026-05-19T10:00:36.3529751Z State: Starting, Action: CreatingContainer, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:00:36.4562245Z Container start method finished after 24761 ms.
+2026-05-19T10:00:36.4564707Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Container remitswift-app successfully created and is running., DetailsLevel: INFO
+2026-05-19T10:00:36.4564988Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: ContainerTimeout, LastErrorTimestamp: 05/19/2026 09:59:55, LastErrorDetails: Container did not start within expected time limit of 230s. Please inspect your container logs for more details., Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
