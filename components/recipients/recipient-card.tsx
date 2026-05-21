@@ -3,7 +3,7 @@
 import type { Recipient } from "@/lib/types"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { CountryFlag, getCountryName } from "@/components/country-flag"
+import { getCountryName } from "@/components/country-flag"
 import { Star, Edit, Trash2, Send } from "lucide-react"
 import Link from "next/link"
 
@@ -14,19 +14,24 @@ interface RecipientCardProps {
   onToggleFavorite: (recipient: Recipient, isFavorite: boolean) => void
 }
 
+const countryFlags: Record<string, string> = {
+  SO: "🇸🇴", KE: "🇰🇪", ET: "🇪🇹", DJ: "🇩🇯", UG: "🇺🇬",
+  TZ: "🇹🇿", GH: "🇬🇭", NG: "🇳🇬", RW: "🇷🇼", ZM: "🇿🇲",
+  SN: "🇸🇳", CM: "🇨🇲", ZA: "🇿🇦", SS: "🇸🇸", ER: "🇪🇷",
+  SD: "🇸🇩", MZ: "🇲🇿", ZW: "🇿🇼", MW: "🇲🇼", BF: "🇧🇫",
+  ML: "🇲🇱", CD: "🇨🇩", PK: "🇵🇰", IN: "🇮🇳",
+}
+
 export function RecipientCard({ recipient, onEdit, onDelete, onToggleFavorite }: RecipientCardProps) {
+  const flag = countryFlags[recipient.country] || "🌍"
+
   const getPayoutMethodLabel = (method: string) => {
     switch (method) {
-      case "bank_transfer":
-        return "Bank Transfer"
-      case "mobile_money":
-        return "Mobile Money"
-      case "cash_pickup":
-        return "Cash Pickup"
-      case "wallet":
-        return "Wallet"
-      default:
-        return method
+      case "bank_transfer": return "Bank Transfer"
+      case "mobile_money": return "Mobile Money"
+      case "cash_pickup": return "Cash Pickup"
+      case "wallet": return "Wallet"
+      default: return method
     }
   }
 
@@ -34,7 +39,9 @@ export function RecipientCard({ recipient, onEdit, onDelete, onToggleFavorite }:
     <Card className="p-6 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <CountryFlag countryCode={recipient.country} className="w-10 h-10" />
+          <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-2xl">
+            {flag}
+          </div>
           <div>
             <h3 className="font-semibold text-lg">
               {recipient.first_name} {recipient.last_name}
@@ -48,9 +55,7 @@ export function RecipientCard({ recipient, onEdit, onDelete, onToggleFavorite }:
           onClick={() => onToggleFavorite(recipient, !recipient.is_favorite)}
           className="h-8 w-8 p-0"
         >
-          <Star
-            className={`w-4 h-4 ${recipient.is_favorite ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`}
-          />
+          <Star className={`w-4 h-4 ${recipient.is_favorite ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground"}`} />
         </Button>
       </div>
 
