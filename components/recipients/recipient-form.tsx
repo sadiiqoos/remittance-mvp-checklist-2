@@ -50,6 +50,24 @@ const mobileMoneyProviders = [
   "SalaamPay Wallet Kenya",
 ]
 
+const bankNames = [
+  "Salaam Bank Transfer",
+  "Ebirr Banks",
+  "ZENITH BANK Ghana",
+  "ACCESS BANK Ghana",
+  "FIDELITY BANK Ghana",
+  "ABSA Ghana",
+  "CAL BANK Ghana",
+  "CONSOLIDATED BANK GHANA LIMITED",
+  "GCB BANK Ghana",
+  "STANBIC BANK Ghana",
+  "ECOBANK Ghana",
+  "NCBA Bank",
+  "Stanbic Bank Uganda",
+  "Ecobank Uganda",
+  "Orient Bank",
+]
+
 export function RecipientForm({ corridors, onSubmit, onCancel, initialData, isEditing = false }: RecipientFormProps) {
   const [submitting, setSubmitting] = useState(false)
   const [formData, setFormData] = useState<RecipientFormData>(
@@ -168,7 +186,14 @@ export function RecipientForm({ corridors, onSubmit, onCancel, initialData, isEd
             <>
               <div className="space-y-2">
                 <Label htmlFor="bankName">Bank Name *</Label>
-                <Input id="bankName" value={formData.bankName} onChange={(e) => setFormData({ ...formData, bankName: e.target.value })} required />
+                <Select value={formData.bankName || ""} onValueChange={(value) => setFormData({ ...formData, bankName: value })}>
+                  <SelectTrigger><SelectValue placeholder="Select bank" /></SelectTrigger>
+                  <SelectContent>
+                    {bankNames.map((bank) => (
+                      <SelectItem key={bank} value={bank}>{bank}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="bankAccountNumber">Account Number *</Label>
