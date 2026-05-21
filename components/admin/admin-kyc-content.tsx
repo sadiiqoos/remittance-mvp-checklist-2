@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getPendingKYCCases, updateUserKYCStatus } from "@/lib/admin-mock-data"
-import { Search, CheckCircle2, XCircle, Clock, User, FileText } from "lucide-react"
+import { Search, CheckCircle2, XCircle, Clock, User, FileText, Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import Image from "next/image"
+import { createClient } from "@/lib/supabase/client"
 
 interface KYCCase {
   id: string
@@ -20,20 +20,15 @@ interface KYCCase {
   kyc_status: string
   date_of_birth: string
   nationality: string
-  phone_number: string
-  submitted_at: string
-  documents: Array<{
-    type: string
-    url: string
-    uploaded_at: string
-  }>
+  phone: string
+  created_at: string
 }
 
 export function AdminKYCContent() {
   const [cases, setCases] = useState<KYCCase[]>([])
-  const [filteredCases, setFilteredCases] = useState<KYCCase[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
-  const [statusFilter, setStatusFilter] = useState("pending")
+  const [statusFilter, setStatusFilter] = useState("all")
   const [selectedCase, setSelectedCase] = useState<KYCCase | null>(null)
   const { toast } = useToast()
 
@@ -41,37 +36,35 @@ export function AdminKYCContent() {
     loadCases()
   }, [])
 
-  useEffect(() => {
-    filterCases()
-  }, [searchQuery, statusFilter, cases])
+  async function loadCases() {
+    setLoading(true)
+    const supabase = createClient()
+    const { data, error } = await supabase
+      .from("users")
+      .select("id, email, first_name, last_name, kyc_status, date_of_birth, nationality, phone, created_at")
+      .order("created_at", { ascending: false })
 
-  const loadCases = () => {
-    const data = getPendingKYCCases()
-    setCases(data)
+    if (error) {
+      console.error("[kyc] loadCases error:", error)
+    } else {
+      setCases((data ?? []).map(u => ({ ...u, user_id: u.id })))
+    }
+    setLoading(false)
   }
 
-  const filterCases = () => {
-    let filtered = cases
+  const handleStatusUpdate = async (userId: string, newStatus: "verified" | "rejected") => {
+    const supabase = createClient()
+    const { error } = await supabase
+      .from("users")
+      .update({ kyc_status: newStatus })
+      .eq("id", userId)
 
-    if (statusFilter !== "all") {
-      filtered = filtered.filter((c) => c.kyc_status === statusFilter)
+    if (error) {
+      toast({ title: "Error", description: "Failed to update KYC status", variant: "destructive" })
+      return
     }
 
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (c) =>
-          c.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          c.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          c.last_name.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    }
-
-    setFilteredCases(filtered)
-  }
-
-  const handleStatusUpdate = (userId: string, newStatus: "verified" | "rejected") => {
-    updateUserKYCStatus(userId, newStatus)
-    loadCases()
+    setCases(cases.map(c => c.user_id === userId ? { ...c, kyc_status: newStatus } : c))
     setSelectedCase(null)
     toast({
       title: "KYC status updated",
@@ -80,14 +73,12 @@ export function AdminKYCContent() {
   }
 
   const getStatusBadge = (status: string) => {
-    const config = {
+    const config: Record<string, { label: string; icon: any; className: string }> = {
       verified: { label: "Verified", icon: CheckCircle2, className: "bg-green-100 text-green-800" },
       pending: { label: "Pending Review", icon: Clock, className: "bg-yellow-100 text-yellow-800" },
       rejected: { label: "Rejected", icon: XCircle, className: "bg-red-100 text-red-800" },
     }
-
-    const { label, icon: Icon, className } = config[status as keyof typeof config] || config.pending
-
+    const { label, icon: Icon, className } = config[status] || config.pending
     return (
       <Badge className={className}>
         <Icon className="w-3 h-3 mr-1" />
@@ -96,16 +87,29 @@ export function AdminKYCContent() {
     )
   }
 
-  const getStats = () => {
-    return {
-      total: cases.length,
-      pending: cases.filter((c) => c.kyc_status === "pending").length,
-      verified: cases.filter((c) => c.kyc_status === "verified").length,
-      rejected: cases.filter((c) => c.kyc_status === "rejected").length,
-    }
+  const stats = {
+    total: cases.length,
+    pending: cases.filter(c => c.kyc_status === "pending").length,
+    verified: cases.filter(c => c.kyc_status === "verified").length,
+    rejected: cases.filter(c => c.kyc_status === "rejected").length,
   }
 
-  const stats = getStats()
+  const filteredCases = cases.filter(c => {
+    const matchesStatus = statusFilter === "all" || c.kyc_status === statusFilter
+    const query = searchQuery.toLowerCase()
+    const matchesSearch = !searchQuery ||
+      c.email?.toLowerCase().includes(query) ||
+      c.first_name?.toLowerCase().includes(query) ||
+      c.last_name?.toLowerCase().includes(query)
+    return matchesStatus && matchesSearch
+  })
+
+  const statCards = [
+    { label: "Total Cases", value: stats.total, filter: "all", color: "text-foreground" },
+    { label: "Pending Review", value: stats.pending, filter: "pending", color: "text-yellow-600" },
+    { label: "Verified", value: stats.verified, filter: "verified", color: "text-green-600" },
+    { label: "Rejected", value: stats.rejected, filter: "rejected", color: "text-red-600" },
+  ]
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -114,23 +118,25 @@ export function AdminKYCContent() {
         <p className="text-muted-foreground">Review and approve user identity verifications</p>
       </div>
 
+      {/* Clickable stat cards */}
       <div className="grid gap-4 md:grid-cols-4 mb-8">
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground mb-1">Total Cases</div>
-          <div className="text-2xl font-bold">{stats.total}</div>
-        </Card>
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground mb-1">Pending Review</div>
-          <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
-        </Card>
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground mb-1">Verified</div>
-          <div className="text-2xl font-bold text-green-600">{stats.verified}</div>
-        </Card>
-        <Card className="p-4">
-          <div className="text-sm text-muted-foreground mb-1">Rejected</div>
-          <div className="text-2xl font-bold text-red-600">{stats.rejected}</div>
-        </Card>
+        {statCards.map((stat) => (
+          <Card
+            key={stat.filter}
+            className={`p-4 cursor-pointer transition-all hover:shadow-md ${
+              statusFilter === stat.filter
+                ? "ring-2 ring-primary border-primary"
+                : "hover:border-primary/50"
+            }`}
+            onClick={() => setStatusFilter(stat.filter)}
+          >
+            <div className="text-sm text-muted-foreground mb-1">{stat.label}</div>
+            <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+            {statusFilter === stat.filter && (
+              <div className="text-xs text-primary mt-1 font-medium">● Active filter</div>
+            )}
+          </Card>
+        ))}
       </div>
 
       <div className="flex gap-4 mb-6">
@@ -156,118 +162,101 @@ export function AdminKYCContent() {
         </Select>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          {filteredCases.map((kycCase) => (
-            <Card
-              key={kycCase.id}
-              className={`p-4 cursor-pointer hover:border-primary transition-colors ${
-                selectedCase?.id === kycCase.id ? "border-primary" : ""
-              }`}
-              onClick={() => setSelectedCase(kycCase)}
-            >
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">
-                      {kycCase.first_name} {kycCase.last_name}
+      {loading ? (
+        <div className="flex justify-center py-12">
+          <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            {filteredCases.map((kycCase) => (
+              <Card
+                key={kycCase.id}
+                className={`p-4 cursor-pointer hover:border-primary transition-colors ${
+                  selectedCase?.id === kycCase.id ? "border-primary" : ""
+                }`}
+                onClick={() => setSelectedCase(kycCase)}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User className="w-5 h-5 text-primary" />
                     </div>
-                    <div className="text-sm text-muted-foreground">{kycCase.email}</div>
+                    <div>
+                      <div className="font-semibold">
+                        {kycCase.first_name} {kycCase.last_name}
+                      </div>
+                      <div className="text-sm text-muted-foreground">{kycCase.email}</div>
+                    </div>
+                  </div>
+                  {getStatusBadge(kycCase.kyc_status)}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Submitted: {new Date(kycCase.created_at).toLocaleDateString()}
+                </div>
+              </Card>
+            ))}
+
+            {filteredCases.length === 0 && (
+              <div className="text-center py-12">
+                <User className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">No cases found</h3>
+                <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
+              </div>
+            )}
+          </div>
+
+          {selectedCase && (
+            <Card className="p-6 h-fit sticky top-4">
+              <h2 className="text-xl font-bold mb-4">Case Details</h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold mb-3">Personal Information</h3>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Name:</span>
+                      <span className="font-medium">{selectedCase.first_name} {selectedCase.last_name}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Email:</span>
+                      <span className="font-medium">{selectedCase.email}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Phone:</span>
+                      <span className="font-medium">{selectedCase.phone || "—"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Date of Birth:</span>
+                      <span className="font-medium">{selectedCase.date_of_birth || "—"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Nationality:</span>
+                      <span className="font-medium">{selectedCase.nationality || "—"}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">KYC Status:</span>
+                      {getStatusBadge(selectedCase.kyc_status)}
+                    </div>
                   </div>
                 </div>
-                {getStatusBadge(kycCase.kyc_status)}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Submitted: {new Date(kycCase.submitted_at).toLocaleDateString()}
+
+                {selectedCase.kyc_status === "pending" && (
+                  <div className="flex gap-3">
+                    <Button className="flex-1" onClick={() => handleStatusUpdate(selectedCase.user_id, "verified")}>
+                      <CheckCircle2 className="w-4 h-4 mr-2" />
+                      Approve
+                    </Button>
+                    <Button variant="destructive" className="flex-1" onClick={() => handleStatusUpdate(selectedCase.user_id, "rejected")}>
+                      <XCircle className="w-4 h-4 mr-2" />
+                      Reject
+                    </Button>
+                  </div>
+                )}
               </div>
             </Card>
-          ))}
-
-          {filteredCases.length === 0 && (
-            <div className="text-center py-12">
-              <User className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No cases found</h3>
-              <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
-            </div>
           )}
         </div>
-
-        {selectedCase && (
-          <Card className="p-6 h-fit sticky top-4">
-            <h2 className="text-xl font-bold mb-4">Case Details</h2>
-
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-semibold mb-3">Personal Information</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Name:</span>
-                    <span className="font-medium">
-                      {selectedCase.first_name} {selectedCase.last_name}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Email:</span>
-                    <span className="font-medium">{selectedCase.email}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Phone:</span>
-                    <span className="font-medium">{selectedCase.phone_number}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Date of Birth:</span>
-                    <span className="font-medium">{selectedCase.date_of_birth}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Nationality:</span>
-                    <span className="font-medium">{selectedCase.nationality}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="font-semibold mb-3">Submitted Documents</h3>
-                <div className="space-y-3">
-                  {selectedCase.documents.map((doc, idx) => (
-                    <div key={idx} className="border rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-2">
-                        <FileText className="w-4 h-4 text-muted-foreground" />
-                        <span className="text-sm font-medium capitalize">{doc.type}</span>
-                      </div>
-                      <div className="relative aspect-[3/2] bg-muted rounded overflow-hidden">
-                        <Image src={doc.url || "/placeholder.svg"} alt={doc.type} fill className="object-cover" />
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-2">
-                        Uploaded: {new Date(doc.uploaded_at).toLocaleDateString()}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {selectedCase.kyc_status === "pending" && (
-                <div className="flex gap-3">
-                  <Button className="flex-1" onClick={() => handleStatusUpdate(selectedCase.user_id, "verified")}>
-                    <CheckCircle2 className="w-4 h-4 mr-2" />
-                    Approve
-                  </Button>
-                  <Button
-                    variant="destructive"
-                    className="flex-1"
-                    onClick={() => handleStatusUpdate(selectedCase.user_id, "rejected")}
-                  >
-                    <XCircle className="w-4 h-4 mr-2" />
-                    Reject
-                  </Button>
-                </div>
-              )}
-            </div>
-          </Card>
-        )}
-      </div>
+      )}
     </main>
   )
 }
